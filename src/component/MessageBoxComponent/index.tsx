@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageBox } from './styles'
+import { MessageBox ,Component } from './styles'
 
 
 
@@ -13,10 +13,10 @@ const MessageBoxComponent: React.FC = ({children}) => {
 
     <MessageBox style={{display: ""}}>
          
-         
+      <Component>
 
         {children}
-           
+        </Component>   
     </MessageBox>
   )
 
