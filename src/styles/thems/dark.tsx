@@ -2,17 +2,17 @@ export default {
 
 tile: 'dark' ,
 colors: {
-    primary: '#1b1f38 ' ,
-    secundary: '#252a48' ,
-    tertiary: '#313862',
+    primary: '#000' ,
+    secundary: '#333' ,
+    tertiary: '#1f1f1f',
 
 
     white: '#fff' ,
     black : '#000' ,
-    gray: '#bfbfbf' ,
+    gray: '#7a7a7a' ,
 
-    success: '#4e41f0' ,
-    info: '#f7931b' ,
+    success: '#1d0df3' ,
+    info: '#b66a0d' ,
     warning: '#e44c4e'
 
 },

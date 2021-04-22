@@ -15,7 +15,7 @@ const LayoutPrincipal: React.FC <ILayoutPrincipal> = ({children, titulo}) => {
           <H1>{titulo}</H1>
           
           <div>
-            <h4 style={{margin: '0 15px' ,fontSize: '8pt', color: '#bfbfbf'}}>Bem vindo!</h4>
+            <H1 style={{margin: '0 15px' ,fontSize: '8pt', color: '#bebebe'}}>Bem vindo!</H1>
           <h3 style={{margin: '0 15px' , color: '#bfbfbf'}}>{String(localStorage.getItem('login'))}</h3>
           </div>
         </HeadLayout>
