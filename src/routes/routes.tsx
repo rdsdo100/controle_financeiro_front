@@ -3,6 +3,8 @@ import { Route, BrowserRouter, Switch, useHistory } from 'react-router-dom'
 import Login from "../pages/Login";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
+import Conta from "../pages/Conta";
+import Usuario from "../pages/Usuario";
 
 
 const PrivateRoute = ({ component, isAuthenticated, ...rest }: any) => {
@@ -27,7 +29,11 @@ const Routes = () => {
 
         <Route component={Login} path='/' exact ></Route>
         <PrivateRoute component={Home} path='/home' ></PrivateRoute>
+        <PrivateRoute component={Conta} path='/conta' ></PrivateRoute>
+        <PrivateRoute component={Usuario} path='/usuario' ></PrivateRoute>
+       
         <Route component={ErrorPage} path='*'></Route>
+
 
       </Switch>
     </BrowserRouter>

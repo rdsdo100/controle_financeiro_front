@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Component = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient( ${props => props.theme.colors.primary}, ${props => props.theme.colors.success} );
+  background: linear-gradient( ${props => props.theme.colors.primary}, ${props => props.theme.colors.tertiary} );
     
 `;
 
@@ -15,7 +15,7 @@ export const LoginBox = styled.div`
   width: 400px;
   padding: 40px;
   transform: translate(-50%, -50%);
-  background: linear-gradient( rgba(21,31,50,1), rgba(36,59,85,1));
+  background: linear-gradient( ${props => props.theme.colors.secundary} , ${props => props.theme.colors.primary});
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
   border-radius: 10px;
@@ -74,7 +74,7 @@ export  const  A = styled.button`
     position: relative;
     display: inline-block;
     padding: 10px 20px;
-    color: #03e9f4;
+    color: ${props => props.theme.colors.success};
     font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;

@@ -17,7 +17,14 @@ const Menu: React.FC = () => {
     const dispath = useDispatch()
     const rotas: IRotasMenu[] = [
         { id: 1, nomeMenu: 'Home', rotaMenu: '/home' },
-       
+        { id: 2, nomeMenu: 'Conta', rotaMenu: '/conta' },
+        { id: 3, nomeMenu: 'Usuario', rotaMenu: '/usuario' }
+
+
+
+    
+        
+      
     ]
 
     const [listRotas, setListRotas] = useState<IRotasMenu[]>([])
