@@ -1,11 +1,23 @@
 import styled from 'styled-components';
 
+
 export const Component = styled.div`
+
  position: relative;
+
 
   
     
 `;
+
+export const ButtonMessage = styled.button`
+position: relative;
+width: 60px;
+background-color: ${props => props.theme.colors.warning};
+color: ${props => props.theme.colors.white};
+
+`;
+
 
 export const MessageBox = styled.div`
   position: absolute;

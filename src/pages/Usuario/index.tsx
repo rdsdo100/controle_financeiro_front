@@ -3,6 +3,7 @@ import React, { FormEvent, ChangeEvent, useEffect, useState } from 'react';
 import InputCadastro from '../../component/inputs/InputCadastro';
 import LayoutPrincipal from '../../component/LayoutPrincipal';
 import { CardListTab, Tab, Tabs } from '../../component/TabsComponents';
+import CardRegisterTab from '../../component/TabsComponents/CardRegisterTab';
 import { api } from '../../services/api';
 
 import { Container } from './styles'
@@ -263,6 +264,7 @@ const Usuario: React.FC = () => {
                     <Tabs IdNameTab="tab1Usuario"
                         defaultCheckedTab={true}
                         text='Cadastrar Usuário'>
+                        <CardRegisterTab>
                         <form onSubmit={handleSubmit}>
 
                             <div style={butonEdit}>
@@ -299,6 +301,7 @@ const Usuario: React.FC = () => {
                           
 
                         </form>
+                        </CardRegisterTab>
                     </Tabs>
                     <Tabs IdNameTab="tab2Usuario" text='Lista de Usuarios'>
                         <CardListTab>
