@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import Button from '../../component/buttons/Button'
 import InputCadastro from '../../component/inputs/InputCadastro'
+import Select from '../../component/inputs/Select'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
 import { CardListTab, Tab, Tabs } from '../../component/TabsComponents'
 import CardRegisterTab from '../../component/TabsComponents/CardRegisterTab'
 import { api } from '../../services/api'
+import { DivBancos, DivSelect, DivImage } from './styles'
 
 
 
-interface IContas {
+export interface IContas {
 
-    id: number
-    qtdPontosUsados: number
+    id?: number
+    qtdPontosUsados?: number
     contadorMovimento?: number
-    ativo: boolean
-    bloqueado: boolean
+    ativo?: boolean
+    bloqueado?: boolean
     nomeConta: string
     qtdPontos: number
     valorConta: number
@@ -27,10 +29,29 @@ interface IContas {
 
 }
 
+export interface IBancos {
+
+    id: number
+    nomeBanco: string
+    urlImagemBanco: string
+
+
+}
+interface IRegisterContas{
+    nomeConta: string
+     valorConta: string
+      qtdPontos: string
+}
+
 const Conta: React.FC = () => {
 
 
     const [listContas, setListContas] = useState<IContas[]>([])
+    const [listBancos, setListBancos] = useState<IBancos[]>([])
+    const [registerContas, setRegisterContas] = useState<IRegisterContas>({
+       nomeConta: '' , valorConta: '' , qtdPontos: ''
+    })
+    
     const auth = localStorage.getItem('Authorization')
 
 
@@ -42,10 +63,24 @@ const Conta: React.FC = () => {
             .then(response => {
                 const resposta: any = response.data
 
-
-                
                 setListContas(resposta)
 
+            })
+            .catch(erro => {
+                alert('Erro ao acessar servidor!')
+
+            })
+
+    }, [])
+
+    useEffect(() => {
+
+        api.get('banco',
+            { headers: { authorization: auth } })
+            .then(response => {
+                const resposta: any = response.data
+
+                setListBancos(resposta)
 
             })
             .catch(erro => {
@@ -57,6 +92,14 @@ const Conta: React.FC = () => {
 
 
 
+    function habdleInputChange(event : ChangeEvent<HTMLInputElement>) {
+        const {name , value} = event.target
+        setRegisterContas({...registerContas , [name ]: value})
+
+        console.log(registerContas)
+
+    }
+
 
     return (
         <LayoutPrincipal titulo="Conta" >
@@ -67,10 +110,46 @@ const Conta: React.FC = () => {
                     IdNameTab="tabRegisterConta"
                     defaultCheckedTab    >
                     <CardRegisterTab>
-                        <InputCadastro>Banco</InputCadastro>
-                        <InputCadastro>Nome da Conta</InputCadastro>
-                        <InputCadastro>Pontos</InputCadastro>
-                        <InputCadastro>Valor Inicial</InputCadastro>
+                  
+                  <DivBancos>
+                      <DivSelect>
+                      <Select
+                                id="empresasSelectAtendimentos"
+
+                                >
+
+                                <option key={0} value='0'>Seleciona a Banco!</option>
+                                {listBancos.map((banco: IBancos) => {
+                                    return <option key={banco.id} value={banco.id}> {banco.nomeBanco}</option>
+                                })}
+
+                            </Select>
+                            <InputCadastro 
+                             id='nomeConta'
+                             name="nomeConta"
+                             onChange={habdleInputChange}
+
+                            >Nome da Conta</InputCadastro>
+                            
+                        <InputCadastro
+                        id='qtdPontos'
+                        name="qtdPontos"
+                      
+                        onChange={habdleInputChange}
+                        >Pontos</InputCadastro>
+
+                    <InputCadastro
+                        id ="valorConta"
+                        name = "valorConta"
+                        onChange={habdleInputChange}
+                        >Valor Inicial</InputCadastro>
+                     
+                      </DivSelect>
+                      <DivImage></DivImage>
+                  </DivBancos>
+                    
+
+
 
 
                         <Button>Cadstrar</Button>
