@@ -6,7 +6,7 @@ import LayoutPrincipal from '../../component/LayoutPrincipal'
 import { CardListTab, Tab, Tabs } from '../../component/TabsComponents'
 import CardRegisterTab from '../../component/TabsComponents/CardRegisterTab'
 import { api } from '../../services/api'
-import { DivBancos, DivSelect, DivImage } from './styles'
+import { DivBancos, DivSelect, DivImage, ImageBanco } from './styles'
 
 
 
@@ -37,10 +37,10 @@ export interface IBancos {
 
 
 }
-interface IRegisterContas{
+interface IRegisterContas {
     nomeConta: string
-     valorConta: string
-      qtdPontos: string
+    valorConta: string
+    qtdPontos: string
 }
 
 const Conta: React.FC = () => {
@@ -49,9 +49,9 @@ const Conta: React.FC = () => {
     const [listContas, setListContas] = useState<IContas[]>([])
     const [listBancos, setListBancos] = useState<IBancos[]>([])
     const [registerContas, setRegisterContas] = useState<IRegisterContas>({
-       nomeConta: '' , valorConta: '' , qtdPontos: ''
+        nomeConta: '', valorConta: '', qtdPontos: ''
     })
-    
+
     const auth = localStorage.getItem('Authorization')
 
 
@@ -90,16 +90,20 @@ const Conta: React.FC = () => {
 
     }, [])
 
-
-
-    function habdleInputChange(event : ChangeEvent<HTMLInputElement>) {
-        const {name , value} = event.target
-        setRegisterContas({...registerContas , [name ]: value})
+    function habdleInputChange(event: ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target
+        setRegisterContas({ ...registerContas, [name]: value })
 
         console.log(registerContas)
 
     }
 
+    function habdleSelectChangeBancos(event: ChangeEvent<HTMLSelectElement>) {
+        const { name, value } = event.target
+       console.log(value)
+       
+
+    }
 
     return (
         <LayoutPrincipal titulo="Conta" >
@@ -110,44 +114,46 @@ const Conta: React.FC = () => {
                     IdNameTab="tabRegisterConta"
                     defaultCheckedTab    >
                     <CardRegisterTab>
-                  
-                  <DivBancos>
-                      <DivSelect>
-                      <Select
-                                id="empresasSelectAtendimentos"
 
-                                >
+                        <DivBancos>
+                            <DivSelect>
+                                <Select
+                                onChange={habdleSelectChangeBancos}
+                                    id="empresasSelectAtendimentos" >
 
-                                <option key={0} value='0'>Seleciona a Banco!</option>
-                                {listBancos.map((banco: IBancos) => {
-                                    return <option key={banco.id} value={banco.id}> {banco.nomeBanco}</option>
-                                })}
+                                    <option key={0} value='0'>Seleciona a Banco!</option>
+                                    {listBancos.map((banco: IBancos) => {
+                                        return <option key={banco.id} value={banco.id}> {banco.nomeBanco}</option>
+                                    })}
 
-                            </Select>
-                            <InputCadastro 
-                             id='nomeConta'
-                             name="nomeConta"
-                             onChange={habdleInputChange}
+                                </Select>
+                                <InputCadastro
+                                    id='nomeConta'
+                                    name="nomeConta"
+                                    onChange={habdleInputChange}
 
-                            >Nome da Conta</InputCadastro>
-                            
-                        <InputCadastro
-                        id='qtdPontos'
-                        name="qtdPontos"
-                      
-                        onChange={habdleInputChange}
-                        >Pontos</InputCadastro>
+                                >Nome da Conta</InputCadastro>
 
-                    <InputCadastro
-                        id ="valorConta"
-                        name = "valorConta"
-                        onChange={habdleInputChange}
-                        >Valor Inicial</InputCadastro>
-                     
-                      </DivSelect>
-                      <DivImage></DivImage>
-                  </DivBancos>
-                    
+                                <InputCadastro
+                                    id='qtdPontos'
+                                    name="qtdPontos"
+
+                                    onChange={habdleInputChange}
+                                >Pontos</InputCadastro>
+
+                                <InputCadastro
+                                    id="valorConta"
+                                    name="valorConta"
+                                    onChange={habdleInputChange}
+                                >Valor Inicial</InputCadastro>
+
+                            </DivSelect>
+
+                            <DivImage>
+                                <ImageBanco src="http://localhost:3333/nubank.png" alt="Girl in a jacket" ></ImageBanco>
+                            </DivImage>
+                        </DivBancos>
+
 
 
 
