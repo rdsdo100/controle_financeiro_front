@@ -44,16 +44,12 @@ const Conta: React.FC = () => {
     const [listContas, setListContas] = useState<IContas[]>([])
     const [listBancos, setListBancos] = useState<IBancos[]>([])
     const [bancos, setBancos] = useState<IBancos>()
+    const [retornoConta , setRetornoConta] = useState<IContas>()
     const [idBanco, setIdBanco] = useState<number>()
     const [nomeConta, setNomeConta] = useState<string>("")
     const [valorConta, setValorConta] = useState<number>()
     const [qtdPontos, setQtdPontos] = useState<number>()
-   
-
-
     const auth = localStorage.getItem('Authorization')
-
-
 
     useEffect(() => {
 
@@ -63,6 +59,7 @@ const Conta: React.FC = () => {
             urlImagemBanco: "https://controle-finaceiro-back.herokuapp.com/sembanco.png"
         })
     }, [])
+
     useEffect(() => {
 
         api.get('conta',
@@ -78,7 +75,7 @@ const Conta: React.FC = () => {
 
             })
 
-    }, [])
+    }, [retornoConta?.id])
 
     useEffect(() => {
 
@@ -97,17 +94,14 @@ const Conta: React.FC = () => {
 
     }, [])
 
-  /*  function habdleInputChange(event: ChangeEvent<HTMLInputElement>) {
-        const { name, value } = event.target
-        setRegisterContas({ ...registerContas, [name]: value })
-    }
-*/
     function habdleSelectChangeBancos(event: ChangeEvent<HTMLSelectElement>) {
         const { name, value } = event.target
 
         if (Number(value) !== 0) {
             setBancos(listBancos.find((item: IBancos) => item.id == Number(value)))
+            setIdBanco(Number(value))
         } else {
+            setIdBanco(Number(0))
             setBancos(
                 {
                     id: 0,
@@ -119,28 +113,28 @@ const Conta: React.FC = () => {
     }
 
     function habdleInputChangeNomeConta(event: ChangeEvent<HTMLInputElement>) {
-        const { name, value } = event.target
-        setNomeConta(String(name))
+        const {value } = event.target
+        setNomeConta(String(value))
     }
     function habdleInputChangeQtdPontos(event: ChangeEvent<HTMLInputElement>) {
-        const { name, value } = event.target
-        setQtdPontos(Number(name))
+        const {value } = event.target
+        setQtdPontos(Number(value))
     }
     function habdleInputChangeValorConta(event: ChangeEvent<HTMLInputElement>) {
-        const { name, value } = event.target
-        setValorConta(Number(name))
+        const {value } = event.target
+        setValorConta(Number(value))
     }
   
 
 
     function clicRegisterBancos() {
-
-
-
        let conta: IContas = {
            nomeConta  : String(nomeConta),
            qtdPontos : Number(qtdPontos),
-           valorConta: Number(valorConta)
+           valorConta: Number(valorConta),
+           bancosIdFK: {
+               id: Number(idBanco)
+           }
         
        }
             
@@ -148,19 +142,14 @@ const Conta: React.FC = () => {
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
-               
+               setRetornoConta(resposta)
                 alert('Salvo!')
 
-            
             }).catch(erro => {
 
                 alert('Não enviado!')
 
             })
-
-
-        
-
         
     }
 
@@ -209,19 +198,11 @@ const Conta: React.FC = () => {
                             </DivSelect>
 
                             <DivImage>
-                                <ImageBanco src={
-
-                                    bancos?.urlImagemBanco
-
-                                } alt="Girl in a jacket" ></ImageBanco>
+                                <ImageBanco src={ bancos?.urlImagemBanco} alt="Logo Banco" ></ImageBanco>
                             </DivImage>
                         </DivBancos>
 
-
-
-
-
-                        <Button>Cadstrar</Button>
+                        <Button onClick={()=>{clicRegisterBancos()}}>Cadstrar</Button>
                     </CardRegisterTab>
 
                 </Tabs>
@@ -229,7 +210,13 @@ const Conta: React.FC = () => {
                 <Tabs
                     text='Lista de contas'
                     IdNameTab="tabListConta" >
-                    <CardListTab></CardListTab>
+                    <CardListTab>
+                    {
+                    listContas.map((conta: IContas) => {
+                        return <p key= {conta.id} >{conta.nomeConta}</p>
+                                    })
+                                    }
+                    </CardListTab>
                 </Tabs>
 
             </Tab>
