@@ -37,20 +37,19 @@ export interface IBancos {
 
 
 }
-interface IRegisterContas {
-    nomeConta: string
-    valorConta: string
-    qtdPontos: string
-}
+
 
 const Conta: React.FC = () => {
 
     const [listContas, setListContas] = useState<IContas[]>([])
     const [listBancos, setListBancos] = useState<IBancos[]>([])
     const [bancos, setBancos] = useState<IBancos>()
-    const [registerContas, setRegisterContas] = useState<IRegisterContas>({
-        nomeConta: '', valorConta: '', qtdPontos: ''
-    })
+    const [idBanco, setIdBanco] = useState<number>()
+    const [nomeConta, setNomeConta] = useState<string>("")
+    const [valorConta, setValorConta] = useState<number>()
+    const [qtdPontos, setQtdPontos] = useState<number>()
+   
+
 
     const auth = localStorage.getItem('Authorization')
 
@@ -98,11 +97,11 @@ const Conta: React.FC = () => {
 
     }, [])
 
-    function habdleInputChange(event: ChangeEvent<HTMLInputElement>) {
+  /*  function habdleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target
         setRegisterContas({ ...registerContas, [name]: value })
     }
-
+*/
     function habdleSelectChangeBancos(event: ChangeEvent<HTMLSelectElement>) {
         const { name, value } = event.target
 
@@ -118,14 +117,34 @@ const Conta: React.FC = () => {
             )
         }
     }
+
+    function habdleInputChangeNomeConta(event: ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target
+        setNomeConta(String(name))
+    }
+    function habdleInputChangeQtdPontos(event: ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target
+        setQtdPontos(Number(name))
+    }
+    function habdleInputChangeValorConta(event: ChangeEvent<HTMLInputElement>) {
+        const { name, value } = event.target
+        setValorConta(Number(name))
+    }
+  
+
+
     function clicRegisterBancos() {
 
 
 
-        if(registerContas.nomeConta !=="" && registerContas.qtdPontos !=="" && registerContas.valorConta !== ""){
-
+       let conta: IContas = {
+           nomeConta  : String(nomeConta),
+           qtdPontos : Number(qtdPontos),
+           valorConta: Number(valorConta)
+        
+       }
             
-            api.post<IRegisterContas>('conta', registerContas ,
+            api.post<IContas>('conta', conta  ,
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
@@ -140,7 +159,7 @@ const Conta: React.FC = () => {
             })
 
 
-        }
+        
 
         
     }
@@ -170,7 +189,7 @@ const Conta: React.FC = () => {
                                 <InputCadastro
                                     id='nomeConta'
                                     name="nomeConta"
-                                    onChange={habdleInputChange}
+                                    onChange={habdleInputChangeNomeConta}
 
                                 >Nome da Conta</InputCadastro>
 
@@ -178,13 +197,13 @@ const Conta: React.FC = () => {
                                     id='qtdPontos'
                                     name="qtdPontos"
 
-                                    onChange={habdleInputChange}
+                                    onChange={habdleInputChangeQtdPontos}
                                 >Pontos</InputCadastro>
 
                                 <InputCadastro
                                     id="valorConta"
                                     name="valorConta"
-                                    onChange={habdleInputChange}
+                                    onChange={habdleInputChangeValorConta}
                                 >Valor Inicial</InputCadastro>
 
                             </DivSelect>
@@ -219,5 +238,5 @@ const Conta: React.FC = () => {
         </LayoutPrincipal>
 
     )
-}
+                            }
 export default Conta
