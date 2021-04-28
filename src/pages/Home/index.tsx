@@ -1,20 +1,14 @@
 import React from 'react'
+import LayoutHome from '../../component/LayoutHome';
 
-import LayoutPrincipal from '../../component/LayoutPrincipal';
+const Home: React.FC = () => {
 
+    return (
+        <LayoutHome titulo="Home" >
 
+        </LayoutHome>
 
- const Home: React.FC = () => {
-
-return(
-<LayoutPrincipal titulo="Home" >
-   
-
-
-
-</LayoutPrincipal>
-
-)
+    )
 }
 export default Home
 

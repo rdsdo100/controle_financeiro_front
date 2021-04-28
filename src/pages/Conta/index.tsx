@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import Button from '../../component/buttons/Button'
+import CardsBancos from '../../component/cards/CardsBancos'
 import InputCadastro from '../../component/inputs/InputCadastro'
 import Select from '../../component/inputs/Select'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
@@ -213,7 +214,11 @@ const Conta: React.FC = () => {
                     <CardListTab>
                     {
                     listContas.map((conta: IContas) => {
-                        return <p key= {conta.id} >{conta.nomeConta}</p>
+                        return <CardsBancos>
+<p key= {conta.id} >{conta.nomeConta}</p>
+                        </CardsBancos> 
+                        
+                        
                                     })
                                     }
                     </CardListTab>
