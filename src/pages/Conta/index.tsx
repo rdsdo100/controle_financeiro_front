@@ -45,9 +45,9 @@ interface IRegisterContas {
 
 const Conta: React.FC = () => {
 
-
     const [listContas, setListContas] = useState<IContas[]>([])
     const [listBancos, setListBancos] = useState<IBancos[]>([])
+    const [bancos, setBancos] = useState<IBancos>()
     const [registerContas, setRegisterContas] = useState<IRegisterContas>({
         nomeConta: '', valorConta: '', qtdPontos: ''
     })
@@ -56,6 +56,14 @@ const Conta: React.FC = () => {
 
 
 
+    useEffect(() => {
+
+        setBancos({
+            id: 0,
+            nomeBanco: "sembanco",
+            urlImagemBanco: "http://localhost:3333/sembanco.png"
+        })
+    }, [])
     useEffect(() => {
 
         api.get('conta',
@@ -93,16 +101,48 @@ const Conta: React.FC = () => {
     function habdleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target
         setRegisterContas({ ...registerContas, [name]: value })
-
-        console.log(registerContas)
-
     }
 
     function habdleSelectChangeBancos(event: ChangeEvent<HTMLSelectElement>) {
         const { name, value } = event.target
-       console.log(value)
-       
 
+        if (Number(value) !== 0) {
+            setBancos(listBancos.find((item: IBancos) => item.id == Number(value)))
+        } else {
+            setBancos(
+                {
+                    id: 0,
+                    nomeBanco: "sembanco",
+                    urlImagemBanco: "http://localhost:3333/sembanco.png"
+                }
+            )
+        }
+    }
+    function clicRegisterBancos() {
+
+
+
+        if(registerContas.nomeConta !=="" && registerContas.qtdPontos !=="" && registerContas.valorConta !== ""){
+
+            
+            api.post<IRegisterContas>('conta', registerContas ,
+            { headers: { authorization: auth } })
+            .then(response => {
+                const resposta: any = response.data
+               
+                alert('Salvo!')
+
+            
+            }).catch(erro => {
+
+                alert('Não enviado!')
+
+            })
+
+
+        }
+
+        
     }
 
     return (
@@ -118,7 +158,7 @@ const Conta: React.FC = () => {
                         <DivBancos>
                             <DivSelect>
                                 <Select
-                                onChange={habdleSelectChangeBancos}
+                                    onChange={habdleSelectChangeBancos}
                                     id="empresasSelectAtendimentos" >
 
                                     <option key={0} value='0'>Seleciona a Banco!</option>
@@ -150,7 +190,11 @@ const Conta: React.FC = () => {
                             </DivSelect>
 
                             <DivImage>
-                                <ImageBanco src="http://localhost:3333/nubank.png" alt="Girl in a jacket" ></ImageBanco>
+                                <ImageBanco src={
+
+                                    bancos?.urlImagemBanco
+
+                                } alt="Girl in a jacket" ></ImageBanco>
                             </DivImage>
                         </DivBancos>
 
