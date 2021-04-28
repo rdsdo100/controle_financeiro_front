@@ -61,7 +61,7 @@ const Conta: React.FC = () => {
         setBancos({
             id: 0,
             nomeBanco: "sembanco",
-            urlImagemBanco: "http://localhost:3333/sembanco.png"
+            urlImagemBanco: "https://controle-finaceiro-back.herokuapp.com/sembanco.png"
         })
     }, [])
     useEffect(() => {
@@ -113,7 +113,7 @@ const Conta: React.FC = () => {
                 {
                     id: 0,
                     nomeBanco: "sembanco",
-                    urlImagemBanco: "http://localhost:3333/sembanco.png"
+                    urlImagemBanco: "https://controle-finaceiro-back.herokuapp.com/sembanco.png"
                 }
             )
         }
