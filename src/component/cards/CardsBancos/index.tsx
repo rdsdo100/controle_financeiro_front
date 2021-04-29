@@ -1,11 +1,35 @@
 import React from 'react';
-import { Container } from './styles';
+import { IContas } from '../../../pages/Conta';
+import { Container, DivBodyBanco, DivButtons, DivLogoBanco, ImageContaBanco } from './styles';
 
-const CardsBancos: React.FC  = ({children}) => {
+const CardsBancos: React.FC <IContas> = ({children ,
+   id ,
+    nomeConta,
+     qtdPontos ,
+      valorConta ,
+      bancosIdFK 
+    
+    }) => {
     
    return (
      <Container>
-         {children}
+         
+         <DivLogoBanco>
+
+        
+
+           <ImageContaBanco src={ bancosIdFK?.urlImagemBanco} alt="Logo Banco"/>
+            </DivLogoBanco>
+
+ <DivBodyBanco> </DivBodyBanco>
+
+ <DivButtons> </DivButtons>
+
+
+
+
+
+
      </Container>
    )
   

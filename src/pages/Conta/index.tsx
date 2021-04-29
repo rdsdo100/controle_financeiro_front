@@ -23,10 +23,13 @@ export interface IContas {
     valorConta: number
     usuariosIdFK?: {
         id: number
-    },
+       
+    }
     bancosIdFK?: {
         id: number
-    },
+        nomeBanco?: string
+        urlImagemBanco?: string
+    }
 
 }
 
@@ -35,10 +38,7 @@ export interface IBancos {
     id: number
     nomeBanco: string
     urlImagemBanco: string
-
-
 }
-
 
 const Conta: React.FC = () => {
 
@@ -68,6 +68,8 @@ const Conta: React.FC = () => {
             .then(response => {
                 const resposta: any = response.data
 
+
+
                 setListContas(resposta)
 
             })
@@ -76,7 +78,7 @@ const Conta: React.FC = () => {
 
             })
 
-    }, [retornoConta?.id])
+    }, [])
 
     useEffect(() => {
 
@@ -214,13 +216,15 @@ const Conta: React.FC = () => {
                     <CardListTab>
                     {
                     listContas.map((conta: IContas) => {
-                        return <CardsBancos>
-<p key= {conta.id} >{conta.nomeConta}</p>
-                        </CardsBancos> 
                         
-                        
-                                    })
-                                    }
+                        return <CardsBancos
+                        key={conta?.id}
+                        id = {conta?.id}
+                        nomeConta= {conta?.nomeConta}
+                        qtdPontos= {conta?.qtdPontos}
+                        valorConta = {conta?.valorConta}
+                        bancosIdFK = {conta?.bancosIdFK}> 
+                        </CardsBancos>  })}
                     </CardListTab>
                 </Tabs>
 
