@@ -5,8 +5,8 @@ import { Container, DivBodyBanco, DivButtons, DivLogoBanco, ImageContaBanco } fr
 const CardsBancos: React.FC <IContas> = ({children ,
    id ,
     nomeConta,
-     qtdPontos ,
-      valorConta ,
+     valorLivre,
+     valorSeparado,
       bancosIdFK 
     
     }) => {

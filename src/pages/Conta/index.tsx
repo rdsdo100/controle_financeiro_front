@@ -11,16 +11,22 @@ import { DivBancos, DivSelect, DivImage, ImageBanco } from './styles'
 
 
 
+
+   
+   
+   
+
+  
+
 export interface IContas {
 
     id?: number
-    qtdPontosUsados?: number
-    contadorMovimento?: number
+    valorLivre: number
+    valorSeparado: number
+    valorTota?: number
     ativo?: boolean
     bloqueado?: boolean
     nomeConta: string
-    qtdPontos: number
-    valorConta: number
     usuariosIdFK?: {
         id: number
        
@@ -48,8 +54,8 @@ const Conta: React.FC = () => {
     const [retornoConta , setRetornoConta] = useState<IContas>()
     const [idBanco, setIdBanco] = useState<number>()
     const [nomeConta, setNomeConta] = useState<string>("")
-    const [valorConta, setValorConta] = useState<number>()
-    const [qtdPontos, setQtdPontos] = useState<number>()
+    const [valorLivre, setValorLivre] = useState<number>()
+    const [valorSeparado, setValorSeparado] = useState<number>()
     const auth = localStorage.getItem('Authorization')
 
     useEffect(() => {
@@ -119,13 +125,13 @@ const Conta: React.FC = () => {
         const {value } = event.target
         setNomeConta(String(value))
     }
-    function habdleInputChangeQtdPontos(event: ChangeEvent<HTMLInputElement>) {
+    function habdleInputChangeValorSeparado(event: ChangeEvent<HTMLInputElement>) {
         const {value } = event.target
-        setQtdPontos(Number(value))
+        setValorSeparado(Number(value))
     }
-    function habdleInputChangeValorConta(event: ChangeEvent<HTMLInputElement>) {
+    function habdleInputChangeValorLivre(event: ChangeEvent<HTMLInputElement>) {
         const {value } = event.target
-        setValorConta(Number(value))
+        setValorLivre(Number(value))
     }
   
 
@@ -133,8 +139,8 @@ const Conta: React.FC = () => {
     function clicRegisterBancos() {
        let conta: IContas = {
            nomeConta  : String(nomeConta),
-           qtdPontos : Number(qtdPontos),
-           valorConta: Number(valorConta),
+           valorLivre : Number(valorLivre),
+           valorSeparado: Number(valorSeparado),
            bancosIdFK: {
                id: Number(idBanco)
            }
@@ -186,17 +192,17 @@ const Conta: React.FC = () => {
                                 >Nome da Conta</InputCadastro>
 
                                 <InputCadastro
-                                    id='qtdPontos'
-                                    name="qtdPontos"
+                                    id='ValorLivre'
+                                    name="ValorLivre"
 
-                                    onChange={habdleInputChangeQtdPontos}
-                                >Pontos</InputCadastro>
+                                    onChange={habdleInputChangeValorLivre}
+                                >Valor Livre</InputCadastro>
 
                                 <InputCadastro
-                                    id="valorConta"
-                                    name="valorConta"
-                                    onChange={habdleInputChangeValorConta}
-                                >Valor Inicial</InputCadastro>
+                                    id="ValorSeparado"
+                                    name="ValorSeparado"
+                                    onChange={habdleInputChangeValorSeparado}
+                                >Valor Separado</InputCadastro>
 
                             </DivSelect>
 
@@ -221,8 +227,8 @@ const Conta: React.FC = () => {
                         key={conta?.id}
                         id = {conta?.id}
                         nomeConta= {conta?.nomeConta}
-                        qtdPontos= {conta?.qtdPontos}
-                        valorConta = {conta?.valorConta}
+                        valorLivre= {conta?.valorLivre}
+                        valorSeparado = {conta?.valorSeparado}
                         bancosIdFK = {conta?.bancosIdFK}> 
                         </CardsBancos>  })}
                     </CardListTab>
