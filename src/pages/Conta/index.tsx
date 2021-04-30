@@ -9,13 +9,6 @@ import CardRegisterTab from '../../component/TabsComponents/CardRegisterTab'
 import { api } from '../../services/api'
 import { DivBancos, DivSelect, DivImage, ImageBanco } from './styles'
 
-
-
-
-   
-   
-   
-
   
 
 export interface IContas {
@@ -23,7 +16,7 @@ export interface IContas {
     id?: number
     valorLivre: number
     valorSeparado: number
-    valorTota?: number
+    valorTotal?: number
     ativo?: boolean
     bloqueado?: boolean
     nomeConta: string
@@ -229,7 +222,8 @@ const Conta: React.FC = () => {
                         nomeConta= {conta?.nomeConta}
                         valorLivre= {conta?.valorLivre}
                         valorSeparado = {conta?.valorSeparado}
-                        bancosIdFK = {conta?.bancosIdFK}> 
+                        bancosIdFK = {conta?.bancosIdFK}
+                        valorTotal = {conta?.valorTotal}> 
                         </CardsBancos>  })}
                     </CardListTab>
                 </Tabs>

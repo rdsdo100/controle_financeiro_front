@@ -20,6 +20,7 @@ export const  Input = styled.input`
   border: 2px solid ${props => props.theme.colors.primary};
   outline: none;
   background: ${props => props.theme.colors.tertiary};
+  font-weight: 600;
 `;
 
 export const  Label = styled.label`
@@ -46,3 +47,5 @@ export const  Label = styled.label`
   
   
 `;
+
+

@@ -1,38 +1,48 @@
 import React from 'react';
 import { IContas } from '../../../pages/Conta';
-import { Container, DivBodyBanco, DivButtons, DivLogoBanco, ImageContaBanco } from './styles';
 
-const CardsBancos: React.FC <IContas> = ({children ,
-   id ,
-    nomeConta,
-     valorLivre,
-     valorSeparado,
-      bancosIdFK 
-    
-    }) => {
-    
-   return (
-     <Container>
-         
-         <DivLogoBanco>
+import {
+  ButtonCardBancos, Container,
+  DivBodyBanco, DivButtons, DivLogoBanco,
+  ImageContaBanco, MdDeleteForeverIcon, MdModeEditIcon,
+  Nomes, SubTitulos, Titulos
+} from './styles';
 
-        
+const CardsBancos: React.FC<IContas> = ({ children,
+  id,
+  nomeConta,
+  valorLivre,
+  valorSeparado,
+  valorTotal,
+  bancosIdFK
 
-           <ImageContaBanco src={ bancosIdFK?.urlImagemBanco} alt="Logo Banco"/>
-            </DivLogoBanco>
+}) => {
 
- <DivBodyBanco> </DivBodyBanco>
+  return (
+    <Container>
 
- <DivButtons> </DivButtons>
+      <DivLogoBanco>
+        <ImageContaBanco src={bancosIdFK?.urlImagemBanco} alt="Logo Banco" />
+      </DivLogoBanco>
 
+      <DivBodyBanco>
+        <Titulos> {nomeConta}</Titulos>
+        <SubTitulos>Valor Total: {valorTotal}</SubTitulos>
+        <Nomes>Valor livre: {valorLivre}</Nomes>
+        <Nomes>Valor separado: {valorSeparado}</Nomes>
 
+      </DivBodyBanco>
 
+      <DivButtons>
 
+        <ButtonCardBancos><MdModeEditIcon /></ButtonCardBancos>
+        <ButtonCardBancos><MdDeleteForeverIcon /></ButtonCardBancos>
 
+      </DivButtons>
 
-     </Container>
-   )
-  
-  };
-  
-  export default CardsBancos;
+    </Container>
+  )
+
+};
+
+export default CardsBancos;
