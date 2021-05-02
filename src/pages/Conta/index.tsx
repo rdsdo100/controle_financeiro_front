@@ -6,6 +6,7 @@ import Select from '../../component/inputs/Select'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
 import { CardListTab, Tab, Tabs } from '../../component/TabsComponents'
 import CardRegisterTab from '../../component/TabsComponents/CardRegisterTab'
+import TelasFlutuantes from '../../component/TelasFlutuantes'
 import { api } from '../../services/api'
 import { DivBancos, DivSelect, DivImage, ImageBanco } from './styles'
 
@@ -41,12 +42,14 @@ export interface IBancos {
 
 const Conta: React.FC = () => {
 
+    
+  const [telaVisivel, setTelaVisivel] = useState<string>("")
     const [listContas, setListContas] = useState<IContas[]>([])
     const [listBancos, setListBancos] = useState<IBancos[]>([])
     const [bancos, setBancos] = useState<IBancos>()
     const [retornoConta , setRetornoConta] = useState<IContas>()
     const [idBanco, setIdBanco] = useState<number>()
-    const [nomeConta, setNomeConta] = useState<string>("")
+    const [nomeConta, setNomeConta] = useState<string>("none")
     const [valorLivre, setValorLivre] = useState<number>()
     const [valorSeparado, setValorSeparado] = useState<number>()
     const auth = localStorage.getItem('Authorization')
@@ -218,13 +221,62 @@ const Conta: React.FC = () => {
                         
                         return <CardsBancos
                         key={conta?.id}
-                        id = {conta?.id}
+                        id = {0}
                         nomeConta= {conta?.nomeConta}
                         valorLivre= {conta?.valorLivre}
                         valorSeparado = {conta?.valorSeparado}
                         bancosIdFK = {conta?.bancosIdFK}
-                        valorTotal = {conta?.valorTotal}> 
+                        valorTotal = {conta?.valorTotal}
+                        idDeleteAtendimentos ={()=>{setTelaVisivel('')}}
+                        idEditAtendimentos ={()=>{setTelaVisivel('')}}
+
+                        > 
                         </CardsBancos>  })}
+
+
+
+
+
+<TelasFlutuantes
+telaVisivel={telaVisivel}
+telaHeight = "70%"
+telaWidth= "80%"
+fechar= {()=>{setTelaVisivel('none')}}
+>
+
+<Select
+                                    onChange={habdleSelectChangeBancos}
+                                    id="empresasSelectAtendimentos" >
+
+                                    <option key={0} value='0'>Seleciona a Banco!</option>
+                                    {listBancos.map((banco: IBancos) => {
+                                        return <option key={banco.id} value={banco.id}> {banco.nomeBanco}</option>
+                                    })}
+
+                                </Select>
+                                <InputCadastro
+                                    id='nomeConta'
+                                    name="nomeConta"
+                                    onChange={habdleInputChangeNomeConta}
+
+                                >Nome da Conta</InputCadastro>
+
+                                <InputCadastro
+                                    id='ValorLivre'
+                                    name="ValorLivre"
+
+                                    onChange={habdleInputChangeValorLivre}
+                                >Valor Livre</InputCadastro>
+
+                                <InputCadastro
+                                    id="ValorSeparado"
+                                    name="ValorSeparado"
+                                    onChange={habdleInputChangeValorSeparado}
+                                >Valor Separado</InputCadastro>
+
+</TelasFlutuantes>
+
+
                     </CardListTab>
                 </Tabs>
 

@@ -8,16 +8,58 @@ import {
   Nomes, SubTitulos, Titulos
 } from './styles';
 
-const CardsBancos: React.FC<IContas> = ({ children,
+
+
+
+interface IContasCard {
+  id: number
+  valorLivre: number
+  valorSeparado: number
+  valorTotal?: number
+  ativo?: boolean
+  bloqueado?: boolean
+  nomeConta: string
+  usuariosIdFK?: {
+      id: number
+     
+  }
+  bancosIdFK?: {
+      id: number
+      nomeBanco?: string
+      urlImagemBanco?: string
+  }
+
+  readonly idDeleteAtendimentos: (arg0: number) => void;
+  readonly idEditAtendimentos: (arg0: number) => void;
+
+
+
+}
+
+const CardsBancos: React.FC<IContasCard> = ({ children,
   id,
   nomeConta,
   valorLivre,
   valorSeparado,
   valorTotal,
-  bancosIdFK
+  bancosIdFK,
+  idDeleteAtendimentos,
+  idEditAtendimentos
+  
 
 }) => {
 
+
+  const buttonDeleteId = () => {
+
+    const novoLabel:number = id
+    idDeleteAtendimentos(novoLabel);
+}
+const buttonEditdId = () => {
+  
+  const novoLabel:number = id
+  idEditAtendimentos(novoLabel);
+}
   return (
     <Container>
 
@@ -35,8 +77,8 @@ const CardsBancos: React.FC<IContas> = ({ children,
 
       <DivButtons>
 
-        <ButtonCardBancos><MdModeEditIcon /></ButtonCardBancos>
-        <ButtonCardBancos><MdDeleteForeverIcon /></ButtonCardBancos>
+        <ButtonCardBancos type="button" onClick={buttonEditdId}><MdModeEditIcon /></ButtonCardBancos>
+        <ButtonCardBancos type="button" onClick={buttonDeleteId} ><MdDeleteForeverIcon /></ButtonCardBancos>
 
       </DivButtons>
 
