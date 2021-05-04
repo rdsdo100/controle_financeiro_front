@@ -3,14 +3,15 @@ import Button from '../../component/buttons/Button'
 import CardsBancos from '../../component/cards/CardsBancos'
 import InputCadastro from '../../component/inputs/InputCadastro'
 import Select from '../../component/inputs/Select'
+import Toggle from '../../component/inputs/Toggle'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
 import { CardListTab, Tab, Tabs } from '../../component/TabsComponents'
 import CardRegisterTab from '../../component/TabsComponents/CardRegisterTab'
 import TelasFlutuantes from '../../component/TelasFlutuantes'
 import { api } from '../../services/api'
-import { DivBancos, DivSelect, DivImage, ImageBanco } from './styles'
+import { DivBancos, DivSelect, DivImage, ImageBanco, DivLinhaConta, Div30Conta, Div70Conta } from './styles'
 
-  
+
 
 export interface IContas {
 
@@ -23,7 +24,7 @@ export interface IContas {
     nomeConta: string
     usuariosIdFK?: {
         id: number
-       
+
     }
     bancosIdFK?: {
         id: number
@@ -42,12 +43,12 @@ export interface IBancos {
 
 const Conta: React.FC = () => {
 
-    
-  const [telaVisivel, setTelaVisivel] = useState<string>("")
+
+    const [telaVisivel, setTelaVisivel] = useState<string>("")
     const [listContas, setListContas] = useState<IContas[]>([])
     const [listBancos, setListBancos] = useState<IBancos[]>([])
     const [bancos, setBancos] = useState<IBancos>()
-    const [retornoConta , setRetornoConta] = useState<IContas>()
+    const [retornoConta, setRetornoConta] = useState<IContas>()
     const [idBanco, setIdBanco] = useState<number>()
     const [nomeConta, setNomeConta] = useState<string>("none")
     const [valorLivre, setValorLivre] = useState<number>()
@@ -118,36 +119,36 @@ const Conta: React.FC = () => {
     }
 
     function habdleInputChangeNomeConta(event: ChangeEvent<HTMLInputElement>) {
-        const {value } = event.target
+        const { value } = event.target
         setNomeConta(String(value))
     }
     function habdleInputChangeValorSeparado(event: ChangeEvent<HTMLInputElement>) {
-        const {value } = event.target
+        const { value } = event.target
         setValorSeparado(Number(value))
     }
     function habdleInputChangeValorLivre(event: ChangeEvent<HTMLInputElement>) {
-        const {value } = event.target
+        const { value } = event.target
         setValorLivre(Number(value))
     }
-  
+
 
 
     function clicRegisterBancos() {
-       let conta: IContas = {
-           nomeConta  : String(nomeConta),
-           valorLivre : Number(valorLivre),
-           valorSeparado: Number(valorSeparado),
-           bancosIdFK: {
-               id: Number(idBanco)
-           }
-        
-       }
-            
-            api.post<IContas>('conta', conta  ,
+        let conta: IContas = {
+            nomeConta: String(nomeConta),
+            valorLivre: Number(valorLivre),
+            valorSeparado: Number(valorSeparado),
+            bancosIdFK: {
+                id: Number(idBanco)
+            }
+
+        }
+
+        api.post<IContas>('conta', conta,
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
-               setRetornoConta(resposta)
+                setRetornoConta(resposta)
                 alert('Salvo!')
 
             }).catch(erro => {
@@ -155,7 +156,7 @@ const Conta: React.FC = () => {
                 alert('Não enviado!')
 
             })
-        
+
     }
 
     return (
@@ -203,11 +204,11 @@ const Conta: React.FC = () => {
                             </DivSelect>
 
                             <DivImage>
-                                <ImageBanco src={ bancos?.urlImagemBanco} alt="Logo Banco" ></ImageBanco>
+                                <ImageBanco src={bancos?.urlImagemBanco} alt="Logo Banco" ></ImageBanco>
                             </DivImage>
                         </DivBancos>
 
-                        <Button onClick={()=>{clicRegisterBancos()}}>Cadstrar</Button>
+                        <Button onClick={() => { clicRegisterBancos() }}>Cadstrar</Button>
                     </CardRegisterTab>
 
                 </Tabs>
@@ -216,56 +217,64 @@ const Conta: React.FC = () => {
                     text='Lista de contas'
                     IdNameTab="tabListConta" >
                     <CardListTab>
-                    {
-                    listContas.map((conta: IContas) => {
-                        
-                        return <CardsBancos
-                        key={conta?.id}
-                        id = {0}
-                        nomeConta= {conta?.nomeConta}
-                        valorLivre= {conta?.valorLivre}
-                        valorSeparado = {conta?.valorSeparado}
-                        bancosIdFK = {conta?.bancosIdFK}
-                        valorTotal = {conta?.valorTotal}
-                        idDeleteAtendimentos ={()=>{setTelaVisivel('')}}
-                        idEditAtendimentos ={()=>{setTelaVisivel('')}}
+                        {
+                            listContas.map((conta: IContas) => {
 
-                        > 
-                        </CardsBancos>  })}
+                                return <CardsBancos
+                                    key={conta?.id}
+                                    id={0}
+                                    nomeConta={conta?.nomeConta}
+                                    valorLivre={conta?.valorLivre}
+                                    valorSeparado={conta?.valorSeparado}
+                                    bancosIdFK={conta?.bancosIdFK}
+                                    valorTotal={conta?.valorTotal}
+                                    idDeleteAtendimentos={() => { setTelaVisivel('') }}
+                                    idEditAtendimentos={() => { setTelaVisivel('') }}
+
+                                >
+                                </CardsBancos>
+                            })}
+
+                        <TelasFlutuantes
+                            telaVisivel={telaVisivel}
+                            telaHeight="70%"
+                            telaWidth="80%"
+                            fechar={() => { setTelaVisivel('none') }}
+                        >
+                            <DivLinhaConta>
 
 
+                                <Div30Conta>
+                                    <InputCadastro
+                                        id='id'
+                                        name="id"
+                                    >Id</InputCadastro>
+                                </Div30Conta>
+                                <Div70Conta>
 
+                                    <Select
+                                        onChange={habdleSelectChangeBancos}
+                                        id="empresasSelectAtendimentos" >
 
+                                        <option key={0} value='0'>Seleciona a Banco!</option>
+                                        {listBancos.map((banco: IBancos) => {
+                                            return <option key={banco.id} value={banco.id}> {banco.nomeBanco}</option>
+                                        })}
 
-<TelasFlutuantes
-telaVisivel={telaVisivel}
-telaHeight = "70%"
-telaWidth= "80%"
-fechar= {()=>{setTelaVisivel('none')}}
->
+                                    </Select>
 
-<Select
-                                    onChange={habdleSelectChangeBancos}
-                                    id="empresasSelectAtendimentos" >
+                                </Div70Conta>
+                            </DivLinhaConta>
 
-                                    <option key={0} value='0'>Seleciona a Banco!</option>
-                                    {listBancos.map((banco: IBancos) => {
-                                        return <option key={banco.id} value={banco.id}> {banco.nomeBanco}</option>
-                                    })}
+                            <InputCadastro
+                                id='nomeConta'
+                                name="nomeConta"
+                            >Nome da Conta</InputCadastro>
 
-                                </Select>
-                                <InputCadastro
-                                    id='nomeConta'
-                                    name="nomeConta"
-                                    onChange={habdleInputChangeNomeConta}
-
-                                >Nome da Conta</InputCadastro>
-
+                            <DivLinhaConta>
                                 <InputCadastro
                                     id='ValorLivre'
                                     name="ValorLivre"
-
-                                    onChange={habdleInputChangeValorLivre}
                                 >Valor Livre</InputCadastro>
 
                                 <InputCadastro
@@ -273,8 +282,28 @@ fechar= {()=>{setTelaVisivel('none')}}
                                     name="ValorSeparado"
                                     onChange={habdleInputChangeValorSeparado}
                                 >Valor Separado</InputCadastro>
+                            </DivLinhaConta>
+                            <DivLinhaConta>
+                                <Toggle></Toggle> ativo
+                            <Toggle></Toggle> ativo
+                            </DivLinhaConta>
 
-</TelasFlutuantes>
+
+
+
+                            {/**   
+    
+    ativo?: boolean
+    bloqueado?: boolean
+   
+  
+    bancosIdFK?: {
+        id: number
+        nomeBanco?: string
+        urlImagemBanco?: string
+    }
+ */}
+                        </TelasFlutuantes>
 
 
                     </CardListTab>
@@ -286,5 +315,5 @@ fechar= {()=>{setTelaVisivel('none')}}
         </LayoutPrincipal>
 
     )
-                            }
+}
 export default Conta
