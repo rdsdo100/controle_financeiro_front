@@ -30,8 +30,8 @@ export const Span = styled.span`
   &:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 16px;
+    width: 16px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -40,9 +40,9 @@ export const Span = styled.span`
   }
 
   Input:checked + &:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(36px);
+    -ms-transform: translateX(36px);
+    transform: translateX(36px);
 
   }
 
@@ -71,5 +71,13 @@ export const  Label = styled.label`
   position: relative;
   display: inline-block;
   width: 60px;
-  height: 34px;
+  height: 24px;
+`;
+
+export const H1Toggle = styled.h1`
+
+margin: 0 15px;
+
+
+
 `;

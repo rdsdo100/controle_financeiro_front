@@ -25,10 +25,11 @@ export const MessageBox = styled.div`
   left: 50%;
   padding: 10px;
   transform: translate(-50%, -50%);
-  background: ${props => props.theme.colors.tertiary};
+  background: ${props => props.theme.colors.secundary};
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
   border-radius: 10px;
+  border: 2px solid ${props => props.theme.colors.primary};
 
 `;
 

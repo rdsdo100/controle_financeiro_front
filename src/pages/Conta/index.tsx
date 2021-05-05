@@ -44,7 +44,7 @@ export interface IBancos {
 const Conta: React.FC = () => {
 
 
-    const [telaVisivel, setTelaVisivel] = useState<string>("")
+    const [telaVisivel, setTelaVisivel] = useState<string>("none")
     const [listContas, setListContas] = useState<IContas[]>([])
     const [listBancos, setListBancos] = useState<IBancos[]>([])
     const [bancos, setBancos] = useState<IBancos>()
@@ -284,25 +284,13 @@ const Conta: React.FC = () => {
                                 >Valor Separado</InputCadastro>
                             </DivLinhaConta>
                             <DivLinhaConta>
-                                <Toggle></Toggle> ativo
-                            <Toggle></Toggle> ativo
+                                <Toggle defaultChecked = {true}>Ativo</Toggle> 
+                            <Toggle defaultChecked = {false}>Bloaqueado</Toggle> 
                             </DivLinhaConta>
 
 
 
 
-                            {/**   
-    
-    ativo?: boolean
-    bloqueado?: boolean
-   
-  
-    bancosIdFK?: {
-        id: number
-        nomeBanco?: string
-        urlImagemBanco?: string
-    }
- */}
                         </TelasFlutuantes>
 
 
