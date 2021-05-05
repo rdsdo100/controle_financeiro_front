@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageBox, Component, ButtonMessage } from './styles'
+import { TelaFlutuante, Component, ButtonMessage } from './styles'
 
 interface ITela {
 
@@ -28,13 +28,14 @@ const TelasFlutuantes: React.FC<ITela> = ({ children,
 
   return (
 
-    <MessageBox style={{ display: telaVisivel, width: telaWidth, height: telaHeight }}>
+    <TelaFlutuante style={{ display: telaVisivel, width: telaWidth, height: telaHeight }}>
+      
       <Component>
         {children}
       </Component>
       <ButtonMessage  style={{background: "#2600ff" ,width: "48%" }} > Editar </ButtonMessage>
       <ButtonMessage onClick={buttonFechar} style={{ width: "48%" }} > Cancelar </ButtonMessage>
-    </MessageBox>
+    </TelaFlutuante>
   )
 
 };

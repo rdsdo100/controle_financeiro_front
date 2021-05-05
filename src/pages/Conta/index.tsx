@@ -3,13 +3,12 @@ import Button from '../../component/buttons/Button'
 import CardsBancos from '../../component/cards/CardsBancos'
 import InputCadastro from '../../component/inputs/InputCadastro'
 import Select from '../../component/inputs/Select'
-import Toggle from '../../component/inputs/Toggle'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
 import { CardListTab, Tab, Tabs } from '../../component/TabsComponents'
 import CardRegisterTab from '../../component/TabsComponents/CardRegisterTab'
-import TelasFlutuantes from '../../component/TelasFlutuantes'
+import EditContas from '../../component/telasEdits/EditContas'
 import { api } from '../../services/api'
-import { DivBancos, DivSelect, DivImage, ImageBanco, DivLinhaConta, Div30Conta, Div70Conta } from './styles'
+import { DivBancos, DivSelect, DivImage, ImageBanco } from './styles'
 
 
 
@@ -228,71 +227,14 @@ const Conta: React.FC = () => {
                                     valorSeparado={conta?.valorSeparado}
                                     bancosIdFK={conta?.bancosIdFK}
                                     valorTotal={conta?.valorTotal}
-                                    idDeleteAtendimentos={() => { setTelaVisivel('') }}
-                                    idEditAtendimentos={() => { setTelaVisivel('') }}
+                                    idDeleteAtendimentos={() => {  }}
+                                    idEditAtendimentos={() => {  }}
 
                                 >
                                 </CardsBancos>
                             })}
 
-                        <TelasFlutuantes
-                            telaVisivel={telaVisivel}
-                            telaHeight="70%"
-                            telaWidth="80%"
-                            fechar={() => { setTelaVisivel('none') }}
-                        >
-                            <DivLinhaConta>
-
-
-                                <Div30Conta>
-                                    <InputCadastro
-                                        id='id'
-                                        name="id"
-                                    >Id</InputCadastro>
-                                </Div30Conta>
-                                <Div70Conta>
-
-                                    <Select
-                                        onChange={habdleSelectChangeBancos}
-                                        id="empresasSelectAtendimentos" >
-
-                                        <option key={0} value='0'>Seleciona a Banco!</option>
-                                        {listBancos.map((banco: IBancos) => {
-                                            return <option key={banco.id} value={banco.id}> {banco.nomeBanco}</option>
-                                        })}
-
-                                    </Select>
-
-                                </Div70Conta>
-                            </DivLinhaConta>
-
-                            <InputCadastro
-                                id='nomeConta'
-                                name="nomeConta"
-                            >Nome da Conta</InputCadastro>
-
-                            <DivLinhaConta>
-                                <InputCadastro
-                                    id='ValorLivre'
-                                    name="ValorLivre"
-                                >Valor Livre</InputCadastro>
-
-                                <InputCadastro
-                                    id="ValorSeparado"
-                                    name="ValorSeparado"
-                                    onChange={habdleInputChangeValorSeparado}
-                                >Valor Separado</InputCadastro>
-                            </DivLinhaConta>
-                            <DivLinhaConta>
-                                <Toggle defaultChecked = {true}>Ativo</Toggle> 
-                            <Toggle defaultChecked = {false}>Bloaqueado</Toggle> 
-                            </DivLinhaConta>
-
-
-
-
-                        </TelasFlutuantes>
-
+<EditContas/>     
 
                     </CardListTab>
                 </Tabs>

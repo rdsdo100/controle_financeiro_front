@@ -19,7 +19,7 @@ color: ${props => props.theme.colors.white};
 `;
 
 
-export const MessageBox = styled.div`
+export const TelaFlutuante = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
