@@ -4,10 +4,12 @@ import styled from 'styled-components';
 export const Component = styled.div`
 
  position: relative;
+`;
 
+export const BarraSuperior = styled.div`
+ position: relative;
+ background-color: ${props => props.theme.colors.secundary};
 
-  
-    
 `;
 
 export const ButtonMessage = styled.button`

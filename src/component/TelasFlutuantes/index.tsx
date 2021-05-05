@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TelaFlutuante, Component, ButtonMessage } from './styles'
+import { TelaFlutuante, Component, ButtonMessage , BarraSuperior } from './styles'
 
 interface ITela {
 
@@ -10,7 +10,6 @@ interface ITela {
   readonly fechar: (arg0: string) => void;
 
 }
-
 
 const TelasFlutuantes: React.FC<ITela> = ({ children,
   telaVisivel, telaWidth, telaHeight,
@@ -23,13 +22,10 @@ const TelasFlutuantes: React.FC<ITela> = ({ children,
   }
 
 
-
-
-
   return (
 
     <TelaFlutuante style={{ display: telaVisivel, width: telaWidth, height: telaHeight }}>
-      
+      <BarraSuperior style={{height: telaHeight }} ></BarraSuperior>
       <Component>
         {children}
       </Component>
