@@ -1,4 +1,7 @@
+import {  IoMdClose } from "react-icons/io";
 import styled from 'styled-components';
+
+
 
 
 export const Component = styled.div`
@@ -8,9 +11,21 @@ export const Component = styled.div`
 
 export const BarraSuperior = styled.div`
  position: relative;
- background-color: ${props => props.theme.colors.secundary};
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: flex-end;
+ width: 100%;
+  height: 40px;
+  background: ${props => props.theme.colors.tertiary};
+  border-radius: 10px 10px 0 0;
+  
 
 `;
+
+
+
+
 
 export const ButtonMessage = styled.button`
 position: relative;
@@ -25,7 +40,7 @@ export const TelaFlutuante = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  padding: 10px;
+  
   transform: translate(-50%, -50%);
   background: ${props => props.theme.colors.secundary};
   box-sizing: border-box;
@@ -38,3 +53,28 @@ export const TelaFlutuante = styled.div`
 
 
 
+
+export const  MdDeleteForeverIcon = styled(IoMdClose)`
+font-size: 30px;
+  position: relative;
+  color: ${props => props.theme.colors.white};
+  padding: 0;
+  
+
+  &:hover {
+        background-color: ${props => props.theme.colors.warning};
+        color: ${props => props.theme.colors.black};
+        border-radius: 8px;
+    }
+
+
+`;
+
+export const  FecharTela = styled.button`
+
+
+background-color: transparent;
+    padding:0;
+    margin: 0 5px;
+
+`;

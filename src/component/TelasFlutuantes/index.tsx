@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TelaFlutuante, Component, ButtonMessage , BarraSuperior } from './styles'
+import { TelaFlutuante, Component, ButtonMessage, BarraSuperior, MdDeleteForeverIcon, FecharTela } from './styles'
 
 interface ITela {
 
@@ -18,18 +18,24 @@ const TelasFlutuantes: React.FC<ITela> = ({ children,
 
   const buttonFechar = () => {
 
-    fechar("");
+    fechar("none");
   }
 
 
   return (
 
     <TelaFlutuante style={{ display: telaVisivel, width: telaWidth, height: telaHeight }}>
-      <BarraSuperior style={{height: telaHeight }} ></BarraSuperior>
+      
+      <BarraSuperior >
+        <FecharTela onClick={buttonFechar}>
+          <MdDeleteForeverIcon />
+        </FecharTela>
+      </BarraSuperior>
+
       <Component>
         {children}
       </Component>
-      <ButtonMessage  style={{background: "#2600ff" ,width: "48%" }} > Editar </ButtonMessage>
+      <ButtonMessage style={{ background: "#2600ff", width: "48%" }} > Editar </ButtonMessage>
       <ButtonMessage onClick={buttonFechar} style={{ width: "48%" }} > Cancelar </ButtonMessage>
     </TelaFlutuante>
   )

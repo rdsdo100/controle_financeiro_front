@@ -49,7 +49,7 @@ const Conta: React.FC = () => {
     const [bancos, setBancos] = useState<IBancos>()
     const [retornoConta, setRetornoConta] = useState<IContas>()
     const [idBanco, setIdBanco] = useState<number>()
-    const [nomeConta, setNomeConta] = useState<string>("none")
+    const [nomeConta, setNomeConta] = useState<string>()
     const [valorLivre, setValorLivre] = useState<number>()
     const [valorSeparado, setValorSeparado] = useState<number>()
     const auth = localStorage.getItem('Authorization')
@@ -158,6 +158,13 @@ const Conta: React.FC = () => {
 
     }
 
+    function editiContas(id: number) {
+
+        setTelaVisivel("")
+     
+
+    }
+
     return (
         <LayoutPrincipal titulo="Conta" >
 
@@ -217,24 +224,24 @@ const Conta: React.FC = () => {
                     IdNameTab="tabListConta" >
                     <CardListTab>
                         {
-                            listContas.map((conta: IContas) => {
+                            listContas.map((conta: any) => {
 
                                 return <CardsBancos
                                     key={conta?.id}
-                                    id={0}
+                                    id={conta.id}
                                     nomeConta={conta?.nomeConta}
                                     valorLivre={conta?.valorLivre}
                                     valorSeparado={conta?.valorSeparado}
                                     bancosIdFK={conta?.bancosIdFK}
                                     valorTotal={conta?.valorTotal}
-                                    idDeleteAtendimentos={() => {  }}
-                                    idEditAtendimentos={() => {  }}
+                                    idDeleteAtendimentos={editiContas}
+                                    idEditAtendimentos={editiContas}
 
                                 >
                                 </CardsBancos>
                             })}
 
-<EditContas/>     
+                        <EditContas visivel={"none"} />
 
                     </CardListTab>
                 </Tabs>
