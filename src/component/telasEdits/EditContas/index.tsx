@@ -7,18 +7,19 @@ import TelasFlutuantes from '../../TelasFlutuantes';
 import { Div30Conta, Div70Conta, DivLinhaConta } from './styles';
 
 interface IEditContas {
-  bancos?: IBancos
-  contas?: IContas
-   visivel: string 
+  bancosEdit: IBancos[]
+  conta: IContas
+   
+  readonly fechar: (arg0: string) => void;
 }
 
 
 
-const EditContas: React.FC <IEditContas> = ({visivel}) => {
+const EditContas: React.FC <IEditContas> = ({fechar , bancosEdit , conta}) => {
 
-  const [telaVisivel, setTelaVisivel] = useState<string>(visivel)
-  const [listContas, setListContas] = useState<IContas[]>([])
-  const [listBancos, setListBancos] = useState<IBancos[]>([])
+  
+  const [contaEdit, setContaEdit] = useState<IContas>(conta)
+  const [listBancos, setListBancos] = useState<IBancos[]>(bancosEdit)
   const [bancos, setBancos] = useState<IBancos>()
 
   const [idBanco, setIdBanco] = useState<number>()
@@ -56,16 +57,21 @@ const EditContas: React.FC <IEditContas> = ({visivel}) => {
   }
 
   function fecharTelaEdit(fechar: string){
-    setTelaVisivel("none")
+   
   }
+  
 
+  const buttonFechar = () => {
+
+    fechar("none");
+  }
 
   return (
     <TelasFlutuantes
-      telaVisivel={telaVisivel}
+      
       telaHeight="70%"
       telaWidth="80%"
-      fechar={fecharTelaEdit}>
+      fechar={buttonFechar}>
       <DivLinhaConta>
         <Div30Conta>
           <InputCadastro
