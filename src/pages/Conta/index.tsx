@@ -191,10 +191,53 @@ console.log(listContas)
         <LayoutPrincipal titulo="Conta" >
 
             <Tab>
+
+            <Tabs
+                    text='Lista de contas'
+                    IdNameTab="tabListConta"
+                    defaultCheckedTab  >
+                    <CardListTab>
+                        {
+                            listContas.map((conta: any) => {
+
+                                return <CardsBancos
+                                    key={conta?.id}
+                                    id={conta.id}
+                                    nomeConta={conta?.nomeConta}
+                                    valorLivre={conta?.valorLivre}
+                                    valorSeparado={conta?.valorSeparado}
+                                    bancosIdFK={conta?.bancosIdFK}
+                                    valorTotal={conta?.valorTotal}
+                                    idDeleteAtendimentos={editiContas}
+                                    idEditAtendimentos={editiContas}
+
+                                >
+                                </CardsBancos>
+                            })}
+
+
+
+                        < div style={{ display: telaVisivel }} >
+                            <EditContas
+                            id = {1}
+                            valorLivre = {10}
+                            valorSeparado = {20}
+                            ativo = {true}
+                            bloqueado = {false}
+                            nomeConta = {"Rubens"}
+                            usuariosIdFK = {1}
+                            bancosIdFK = {0}
+
+                                fechar={() => {setTelaVisivel("none") }}></EditContas>
+                        </ div>
+
+                    </CardListTab>
+                </Tabs>
+
                 <Tabs
                     text='Cadastro'
                     IdNameTab="tabRegisterConta"
-                    defaultCheckedTab    >
+                       >
                     <CardRegisterTab>
 
                         <DivBancos>
@@ -241,46 +284,7 @@ console.log(listContas)
 
                 </Tabs>
 
-                <Tabs
-                    text='Lista de contas'
-                    IdNameTab="tabListConta" >
-                    <CardListTab>
-                        {
-                            listContas.map((conta: any) => {
-
-                                return <CardsBancos
-                                    key={conta?.id}
-                                    id={conta.id}
-                                    nomeConta={conta?.nomeConta}
-                                    valorLivre={conta?.valorLivre}
-                                    valorSeparado={conta?.valorSeparado}
-                                    bancosIdFK={conta?.bancosIdFK}
-                                    valorTotal={conta?.valorTotal}
-                                    idDeleteAtendimentos={editiContas}
-                                    idEditAtendimentos={editiContas}
-
-                                >
-                                </CardsBancos>
-                            })}
-
-
-
-                        < div style={{ display: telaVisivel }} >
-                            <EditContas
-                            id = {1}
-                            valorLivre = {10}
-                            valorSeparado = {20}
-                            ativo = {true}
-                            bloqueado = {false}
-                            nomeConta = {"Rubens"}
-                            usuariosIdFK = {1}
-                            bancosIdFK = {0}
-
-                                fechar={() => {setTelaVisivel("none") }}></EditContas>
-                        </ div>
-
-                    </CardListTab>
-                </Tabs>
+               
 
             </Tab>
 
