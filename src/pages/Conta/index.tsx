@@ -40,12 +40,25 @@ export interface IBancos {
     urlImagemBanco: string
 }
 
+
+export interface IContaEdit{
+   
+    id: number
+    valorLivre: number
+    valorSeparado: number
+    ativo: boolean
+    bloqueado: boolean
+    nomeConta: string
+    usuariosIdFK : number    
+    bancosIdFK: number 
+}
+
 const Conta: React.FC = () => {
 
 
     const [telaVisivel, setTelaVisivel] = useState<string>("none")
     const [listContas, setListContas] = useState<IContas[]>([])
-    const [contaEdit, setContaEdit] = useState<IContas>()
+    const [contaEdit, setContaEdit] = useState<IContas>(listContas[0])
     const [listBancos, setListBancos] = useState<IBancos[]>([])
     const [bancos, setBancos] = useState<IBancos>()
     const [retornoConta, setRetornoConta] = useState<IContas>()
@@ -163,8 +176,14 @@ const Conta: React.FC = () => {
 
         setTelaVisivel("")
 
-        const  conta =  listContas.find(item => item.id === id)
-setContaEdit(conta)
+        let  conta : IContas
+
+        
+
+console.log(listContas)
+
+
+
 
     }
 
@@ -248,8 +267,14 @@ setContaEdit(conta)
 
                         < div style={{ display: telaVisivel }} >
                             <EditContas
-                            bancosEdit = { listBancos}
-                            conta = {contaEdit || listContas[0]}
+                            id = {1}
+                            valorLivre = {10}
+                            valorSeparado = {20}
+                            ativo = {true}
+                            bloqueado = {false}
+                            nomeConta = {"Rubens"}
+                            usuariosIdFK = {1}
+                            bancosIdFK = {0}
 
                                 fechar={() => {setTelaVisivel("none") }}></EditContas>
                         </ div>

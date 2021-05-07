@@ -1,3 +1,4 @@
+import { StringDecoder } from 'node:string_decoder';
 import React, { useState } from 'react';
 import { IBancos, IContas } from '../../../pages/Conta';
 import InputCadastro from '../../inputs/InputCadastro';
@@ -7,51 +8,82 @@ import TelasFlutuantes from '../../TelasFlutuantes';
 import { Div30Conta, Div70Conta, DivLinhaConta } from './styles';
 
 interface IEditContas {
-  bancosEdit: IBancos[]
-  conta: IContas
+  
+  id: number
+  valorLivre: number
+  valorSeparado: number
+  ativo: boolean
+  bloqueado: boolean
+  nomeConta: string
+  usuariosIdFK : number    
+  bancosIdFK: number 
    
   readonly fechar: (arg0: string) => void;
 }
 
 
 
-const EditContas: React.FC <IEditContas> = ({fechar , bancosEdit , conta}) => {
+const EditContas: React.FC <IEditContas> = ({
+    id,
+  valorLivre,
+  valorSeparado,
+  ativo,
+  bloqueado,
+  nomeConta,
+  usuariosIdFK,
+  bancosIdFK,  
+  fechar
+}) => {
 
   
-  const [contaEdit, setContaEdit] = useState<IContas>(conta)
-  const [listBancos, setListBancos] = useState<IBancos[]>(bancosEdit)
-  const [bancos, setBancos] = useState<IBancos>()
 
-  const [idBanco, setIdBanco] = useState<number>()
-  const [nomeConta, setNomeConta] = useState<string>("")
-  const [valorLivre, setValorLivre] = useState<number>()
-  const [valorSeparado, setValorSeparado] = useState<number>()
+
+ 
   const auth = localStorage.getItem('Authorization')
 
 
 
 
   function corregarCampos() {
-    if ((document.getElementById("textAreaAtendimento")) &&
-      (document.getElementById("empresasSelectAtendimentos")) &&
-      (document.getElementById("IdAtendimento"))) {
+   
 
-      (document.getElementById("textAreaAtendimento") as HTMLInputElement).value = "";
-      (document.getElementById("empresasSelectAtendimentos") as HTMLInputElement).value = "idEmpresa";
-      (document.getElementById("IdAtendimento") as HTMLInputElement).value = "id";
+    if ((document.getElementById("id")) &&
+    (document.getElementById("empresasSelectContas")) &&
+    (document.getElementById("nomeConta")) &&
+    (document.getElementById("ValorLivre")) &&
+    (document.getElementById("ValorSeparado"))) {
 
-    }
+      (document.getElementById("id") as HTMLInputElement).value = String(id );
+    (document.getElementById("empresasSelectContas") as HTMLInputElement).value = "0";
+    (document.getElementById("nomeConta") as HTMLInputElement).value = "";
+    (document.getElementById("ValorLivre") as HTMLInputElement).value = "";
+    (document.getElementById("ValorSeparado") as HTMLInputElement).value = "";
+    
+
+
+
+  }
+
+
   }
 
   
   function limparCampos() {
-    if ((document.getElementById("textAreaAtendimento")) &&
-      (document.getElementById("empresasSelectAtendimentos")) &&
-      (document.getElementById("IdAtendimento"))) {
 
-      (document.getElementById("textAreaAtendimento") as HTMLInputElement).value = "";
-      (document.getElementById("empresasSelectAtendimentos") as HTMLInputElement).value = "idEmpresa";
-      (document.getElementById("IdAtendimento") as HTMLInputElement).value = "id";
+    if ((document.getElementById("id")) &&
+      (document.getElementById("empresasSelectContas")) &&
+      (document.getElementById("nomeConta")) &&
+      (document.getElementById("ValorLivre")) &&
+      (document.getElementById("ValorSeparado"))) {
+
+        (document.getElementById("id") as HTMLInputElement).value = "";
+      (document.getElementById("empresasSelectContas") as HTMLInputElement).value = "0";
+      (document.getElementById("nomeConta") as HTMLInputElement).value = "";
+      (document.getElementById("ValorLivre") as HTMLInputElement).value = "";
+      (document.getElementById("ValorSeparado") as HTMLInputElement).value = "";
+      
+
+
 
     }
   }
@@ -77,20 +109,19 @@ const EditContas: React.FC <IEditContas> = ({fechar , bancosEdit , conta}) => {
           <InputCadastro
             id='id'
             name="id"
+            defaultValue = {id}
           >Id</InputCadastro>
         </Div30Conta>
         <Div70Conta>
 
-          <Select
-
-            id="empresasSelectAtendimentos" >
-
+        {/*  <Select
+            id="empresasSelectContas" >
             <option key={0} value='0'>Seleciona a Banco!</option>
             {listBancos.map((banco: IBancos) => {
               return <option key={banco.id} value={banco.id}> {banco.nomeBanco}</option>
             })}
 
-          </Select>
+          </Select> */}
 
         </Div70Conta>
       </DivLinhaConta>
@@ -98,6 +129,9 @@ const EditContas: React.FC <IEditContas> = ({fechar , bancosEdit , conta}) => {
       <InputCadastro
         id='nomeConta'
         name="nomeConta"
+
+        defaultValue = {nomeConta}
+
       >Nome da Conta</InputCadastro>
 
       <DivLinhaConta>
