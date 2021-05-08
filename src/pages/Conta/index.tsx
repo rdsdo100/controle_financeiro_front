@@ -217,7 +217,8 @@ const Conta: React.FC = () => {
                                     valorSeparado={conta?.valorSeparado}
                                     bancosIdFK={conta?.bancosIdFK}
                                     valorTotal={conta?.valorTotal}
-                                    idDeleteAtendimentos={editiContas}
+                                    idDeleteAtendimentos={(id : number)=>{
+                                        alert(`Ainda Não esta deletando o Id = ${id}. `)}}
                                     idEditAtendimentos={editiContas}
 
                                 >
