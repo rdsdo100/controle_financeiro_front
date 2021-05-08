@@ -1,97 +1,126 @@
-import { StringDecoder } from 'node:string_decoder';
-import React, { useState } from 'react';
-import { IBancos, IContas } from '../../../pages/Conta';
+import React, { ChangeEvent, useState } from 'react';
+import { IContas } from '../../../pages/Conta';
+import { api } from '../../../services/api';
+import Button from '../../buttons/Button';
 import InputCadastro from '../../inputs/InputCadastro';
-import Select from '../../inputs/Select';
 import Toggle from '../../inputs/Toggle';
 import TelasFlutuantes from '../../TelasFlutuantes';
 import { Div30Conta, Div70Conta, DivLinhaConta } from './styles';
 
 interface IEditContas {
-  
-  id: number
-  valorLivre: number
-  valorSeparado: number
-  ativo: boolean
-  bloqueado: boolean
-  nomeConta: string
-  usuariosIdFK : number    
-  bancosIdFK: number 
-   
+
+  id?: number
+  valorLivre?: number
+  valorSeparado?: number
+  ativo?: boolean
+  bloqueado?: boolean
+  nomeConta?: string
+  usuariosIdFK?: number
+  bancosIdFK?: number
+  contaAtualizar: number
   readonly fechar: (arg0: string) => void;
+  readonly retornoEdit: (arg0: number) => void;
 }
 
-
-
-const EditContas: React.FC <IEditContas> = ({
-    id,
+const EditContas: React.FC<IEditContas> = ({
+  id,
   valorLivre,
   valorSeparado,
   ativo,
   bloqueado,
   nomeConta,
-  usuariosIdFK,
-  bancosIdFK,  
-  fechar
+  contaAtualizar,
+  fechar,
+  retornoEdit
 }) => {
 
-  
-
-
- 
+  const [valorlivreEdit, setValorLivreEdit] = useState<number>()
+  const [valorSeparadoEdit, setValorSeparadoEdit] = useState<number>()
+  const [ativoEdit, setAtivoEdit] = useState<boolean>()
+  const [bloqueadoEdit, setBloqueadoEdit] = useState<boolean>()
+  const [nomeContaEdit, setNomeContaEdit] = useState<string>()
   const auth = localStorage.getItem('Authorization')
 
 
 
-
-  function corregarCampos() {
-   
-
-    if ((document.getElementById("id")) &&
-    (document.getElementById("empresasSelectContas")) &&
-    (document.getElementById("nomeConta")) &&
-    (document.getElementById("ValorLivre")) &&
-    (document.getElementById("ValorSeparado"))) {
-
-      (document.getElementById("id") as HTMLInputElement).value = String(id );
-    (document.getElementById("empresasSelectContas") as HTMLInputElement).value = "0";
-    (document.getElementById("nomeConta") as HTMLInputElement).value = "";
-    (document.getElementById("ValorLivre") as HTMLInputElement).value = "";
-    (document.getElementById("ValorSeparado") as HTMLInputElement).value = "";
-    
-
-
-
+  function habdleInputChangeNomeConta(event: ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target
+    setNomeContaEdit(String(value))
+  }
+  function habdleInputChangeValorSeparado(event: ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target
+    setValorSeparadoEdit(Number(value))
+  }
+  function habdleInputChangeValorLivre(event: ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target
+    setValorLivreEdit(Number(value))
   }
 
-
+  function habdleInputChangeAtivo(event: ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target
+    setAtivoEdit(Boolean(value))
   }
 
-  
-  function limparCampos() {
+  function habdleInputChangeBloqueado(event: ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target
+    setBloqueadoEdit(Boolean(value))
+  }
 
-    if ((document.getElementById("id")) &&
-      (document.getElementById("empresasSelectContas")) &&
-      (document.getElementById("nomeConta")) &&
-      (document.getElementById("ValorLivre")) &&
-      (document.getElementById("ValorSeparado"))) {
+  const buttonEdit = () => {
 
-        (document.getElementById("id") as HTMLInputElement).value = "";
-      (document.getElementById("empresasSelectContas") as HTMLInputElement).value = "0";
-      (document.getElementById("nomeConta") as HTMLInputElement).value = "";
-      (document.getElementById("ValorLivre") as HTMLInputElement).value = "";
-      (document.getElementById("ValorSeparado") as HTMLInputElement).value = "";
-      
+    let editConta = {
+      id: 0,
+      valorLivre: valorlivreEdit,
+      valorSeparado: valorSeparadoEdit,
+      ativo: ativoEdit,
+      bloqueado: bloqueadoEdit,
+      nomeConta: nomeContaEdit,
+    }
+
+    if (
+      editConta.id !== 0 ||
+      editConta.valorLivre ||
+      editConta.valorSeparado ||
+      editConta.ativo ||
+      editConta.bloqueado ||
+      editConta.nomeConta
+    ) {
+      editConta.id = Number(id)
 
 
+      api.put<IContas>('conta', editConta,
+        { headers: { authorization: auth } })
+        .then(response => {
+          const resposta: any = response.data
 
+          alert('Salvo!')
+          limparCamposObj()
+          retornoEdit(contaAtualizar + 1);
+
+        }).catch(erro => {
+          console.log(erro)
+          alert('Não enviado!')
+
+        })
+
+
+    } else {
+      alert("Sem alterações feitas")
     }
   }
 
-  function fecharTelaEdit(fechar: string){
-   
+
+
+  function limparCamposObj() {
+
+    id = 0
+    setValorLivreEdit(undefined)
+    setValorSeparadoEdit(undefined)
+    setAtivoEdit(undefined)
+    setBloqueadoEdit(undefined)
+    setNomeContaEdit(undefined)
   }
-  
+
 
   const buttonFechar = () => {
 
@@ -100,7 +129,6 @@ const EditContas: React.FC <IEditContas> = ({
 
   return (
     <TelasFlutuantes
-      
       telaHeight="70%"
       telaWidth="80%"
       fechar={buttonFechar}>
@@ -109,12 +137,12 @@ const EditContas: React.FC <IEditContas> = ({
           <InputCadastro
             id='id'
             name="id"
-            defaultValue = {id}
+            defaultValue={id}
           >Id</InputCadastro>
         </Div30Conta>
         <Div70Conta>
 
-        {/*  <Select
+          {/*  <Select
             id="empresasSelectContas" >
             <option key={0} value='0'>Seleciona a Banco!</option>
             {listBancos.map((banco: IBancos) => {
@@ -127,34 +155,49 @@ const EditContas: React.FC <IEditContas> = ({
       </DivLinhaConta>
 
       <InputCadastro
-        id='nomeConta'
-        name="nomeConta"
-
-        defaultValue = {nomeConta}
-
+        id='nomeContaEdit'
+        name="nomeContaEdit"
+        defaultValue={nomeConta}
+        onChange={habdleInputChangeNomeConta}
       >Nome da Conta</InputCadastro>
 
       <DivLinhaConta>
         <InputCadastro
-          id='ValorLivre'
-          name="ValorLivre"
+          id='ValorLivreEdit'
+          name="ValorLivreEdit"
+          onChange={habdleInputChangeValorLivre}
+          defaultValue={valorLivre}
         >Valor Livre</InputCadastro>
 
         <InputCadastro
-          id="ValorSeparado"
-          name="ValorSeparado"
-
+          id="ValorSeparadoEdit"
+          name="ValorSeparadoEdit"
+          onChange={habdleInputChangeValorSeparado}
+          defaultValue={valorSeparado}
         >Valor Separado</InputCadastro>
       </DivLinhaConta>
       <DivLinhaConta>
-        <Toggle defaultChecked={true}>Ativo</Toggle>
-        <Toggle defaultChecked={false}>Bloaqueado</Toggle>
+        <Toggle
+          id="ativo"
+          name="ativo"
+          onChange={habdleInputChangeAtivo}
+          defaultChecked={ativo}>
+          Ativo</Toggle>
+
+        <Toggle
+          id="bloqueado"
+          name="bloqueado"
+          onChange={habdleInputChangeBloqueado}
+          defaultChecked={bloqueado}>
+          Bloaqueado</Toggle>
       </DivLinhaConta>
 
+
+      <Button onClick={buttonEdit} style={{ background: "#2600ff", width: "48%" }} > Editar </Button>
+      <Button onClick={buttonFechar} style={{ width: "48%" }} > Cancelar </Button>
+
     </TelasFlutuantes>
-
   )
-
 };
 
 export default EditContas;

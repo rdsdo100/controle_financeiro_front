@@ -41,16 +41,16 @@ export interface IBancos {
 }
 
 
-export interface IContaEdit{
-   
+export interface IContaEdit {
+
     id: number
     valorLivre: number
     valorSeparado: number
     ativo: boolean
     bloqueado: boolean
     nomeConta: string
-    usuariosIdFK : number    
-    bancosIdFK: number 
+    usuariosIdFK: number
+    bancosIdFK: number
 }
 
 const Conta: React.FC = () => {
@@ -58,7 +58,7 @@ const Conta: React.FC = () => {
 
     const [telaVisivel, setTelaVisivel] = useState<string>("none")
     const [listContas, setListContas] = useState<IContas[]>([])
-    const [contaEdit, setContaEdit] = useState<IContas>(listContas[0])
+    const [contaEdit, setContaEdit] = useState<IContaEdit>()
     const [listBancos, setListBancos] = useState<IBancos[]>([])
     const [bancos, setBancos] = useState<IBancos>()
     const [retornoConta, setRetornoConta] = useState<IContas>()
@@ -67,6 +67,7 @@ const Conta: React.FC = () => {
     const [valorLivre, setValorLivre] = useState<number>()
     const [valorSeparado, setValorSeparado] = useState<number>()
     const auth = localStorage.getItem('Authorization')
+    const [contaAtualizar, setContaAtualizar] = useState<number>(0)
 
     useEffect(() => {
 
@@ -83,9 +84,6 @@ const Conta: React.FC = () => {
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
-
-
-
                 setListContas(resposta)
 
             })
@@ -94,7 +92,7 @@ const Conta: React.FC = () => {
 
             })
 
-    }, [])
+    }, [contaAtualizar])
 
     useEffect(() => {
 
@@ -102,9 +100,7 @@ const Conta: React.FC = () => {
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
-
                 setListBancos(resposta)
-
             })
             .catch(erro => {
                 alert('Erro ao acessar servidor!')
@@ -148,6 +144,7 @@ const Conta: React.FC = () => {
 
     function clicRegisterBancos() {
         let conta: IContas = {
+
             nomeConta: String(nomeConta),
             valorLivre: Number(valorLivre),
             valorSeparado: Number(valorSeparado),
@@ -162,10 +159,12 @@ const Conta: React.FC = () => {
             .then(response => {
                 const resposta: any = response.data
                 setRetornoConta(resposta)
+
+                setContaAtualizar(contaAtualizar + 1)
                 alert('Salvo!')
 
             }).catch(erro => {
-
+                console.log(erro)
                 alert('Não enviado!')
 
             })
@@ -175,13 +174,23 @@ const Conta: React.FC = () => {
     function editiContas(id: number) {
 
         setTelaVisivel("")
+        let contaEditRetorno: IContaEdit
 
-        let  conta : IContas
+        let conta: any = listContas.find((item: IContas) => item.id == id)
 
-        
+        contaEditRetorno = {
+            id: Number(conta.id),
+            valorLivre: Number(conta.valorLivre),
+            valorSeparado: Number(conta.valorSeparado),
+            ativo: Boolean(conta.ativo),
+            bloqueado: Boolean(conta.bloqueado),
+            nomeConta: String(conta.nomeConta),
+            usuariosIdFK: Number(conta.usuariosIdFK.id),
+            bancosIdFK: Number(conta.bancosIdFK.id)
 
-console.log(listContas)
+        }
 
+        setContaEdit(contaEditRetorno)
 
 
 
@@ -192,7 +201,7 @@ console.log(listContas)
 
             <Tab>
 
-            <Tabs
+                <Tabs
                     text='Lista de contas'
                     IdNameTab="tabListConta"
                     defaultCheckedTab  >
@@ -219,16 +228,15 @@ console.log(listContas)
 
                         < div style={{ display: telaVisivel }} >
                             <EditContas
-                            id = {1}
-                            valorLivre = {10}
-                            valorSeparado = {20}
-                            ativo = {true}
-                            bloqueado = {false}
-                            nomeConta = {"Rubens"}
-                            usuariosIdFK = {1}
-                            bancosIdFK = {0}
-
-                                fechar={() => {setTelaVisivel("none") }}></EditContas>
+                                id={contaEdit?.id}
+                                valorLivre={contaEdit?.valorLivre}
+                                valorSeparado={contaEdit?.valorSeparado}
+                                ativo={contaEdit?.ativo}
+                                bloqueado={contaEdit?.bloqueado}
+                                nomeConta={contaEdit?.nomeConta}
+                                contaAtualizar={contaAtualizar}
+                                retornoEdit={(item: number) => { setContaAtualizar(item) }}
+                                fechar={() => { setTelaVisivel("none") }}></EditContas>
                         </ div>
 
                     </CardListTab>
@@ -237,7 +245,7 @@ console.log(listContas)
                 <Tabs
                     text='Cadastro'
                     IdNameTab="tabRegisterConta"
-                       >
+                >
                     <CardRegisterTab>
 
                         <DivBancos>
@@ -284,7 +292,7 @@ console.log(listContas)
 
                 </Tabs>
 
-               
+
 
             </Tab>
 

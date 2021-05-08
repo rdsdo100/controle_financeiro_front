@@ -4,18 +4,17 @@ import { TelaFlutuante, Component, ButtonMessage, BarraSuperior, MdDeleteForever
 interface ITela {
 
 
-  
+
   telaWidth?: string
   telaHeight?: string
   readonly fechar: (arg0: string) => void;
-  
+
 
 }
 
 const TelasFlutuantes: React.FC<ITela> = ({ children,
-   telaWidth, telaHeight,
+  telaWidth, telaHeight,
   fechar }) => {
-
 
   const buttonFechar = () => {
 
@@ -26,7 +25,7 @@ const TelasFlutuantes: React.FC<ITela> = ({ children,
   return (
 
     <TelaFlutuante style={{ width: telaWidth, height: telaHeight }}>
-      
+
       <BarraSuperior >
         <FecharTela onClick={buttonFechar}>
           <MdDeleteForeverIcon />
@@ -36,8 +35,7 @@ const TelasFlutuantes: React.FC<ITela> = ({ children,
       <Component>
         {children}
       </Component>
-      <ButtonMessage style={{ background: "#2600ff", width: "48%" }} > Editar </ButtonMessage>
-      <ButtonMessage onClick={buttonFechar} style={{ width: "48%" }} > Cancelar </ButtonMessage>
+
     </TelaFlutuante>
   )
 
