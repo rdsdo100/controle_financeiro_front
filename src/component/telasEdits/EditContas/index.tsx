@@ -41,8 +41,6 @@ const EditContas: React.FC<IEditContas> = ({
   const [nomeContaEdit, setNomeContaEdit] = useState<string>()
   const auth = localStorage.getItem('Authorization')
 
-
-
   function habdleInputChangeNomeConta(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
     setNomeContaEdit(String(value))
@@ -85,8 +83,8 @@ const EditContas: React.FC<IEditContas> = ({
       editConta.bloqueado ||
       editConta.nomeConta
     ) {
-      editConta.id = Number(id)
 
+      editConta.id = Number(id)
 
       api.put<IContas>('conta', editConta,
         { headers: { authorization: auth } })
@@ -103,9 +101,9 @@ const EditContas: React.FC<IEditContas> = ({
 
         })
 
-
     } else {
       alert("Sem alterações feitas")
+
     }
   }
 
@@ -120,7 +118,6 @@ const EditContas: React.FC<IEditContas> = ({
     setBloqueadoEdit(undefined)
     setNomeContaEdit(undefined)
   }
-
 
   const buttonFechar = () => {
 
