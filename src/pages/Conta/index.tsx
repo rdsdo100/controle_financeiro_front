@@ -109,7 +109,9 @@ const Conta: React.FC = () => {
 
     }, [])
 
-    function habdleSelectChangeBancos(event: ChangeEvent<HTMLSelectElement>) {
+
+
+    function handleSelectChangeBancos(event: ChangeEvent<HTMLSelectElement>) {
         const { name, value } = event.target
 
         if (Number(value) !== 0) {
@@ -127,15 +129,15 @@ const Conta: React.FC = () => {
         }
     }
 
-    function habdleInputChangeNomeConta(event: ChangeEvent<HTMLInputElement>) {
+    function handleInputChangeNomeConta(event: ChangeEvent<HTMLInputElement>) {
         const { value } = event.target
         setNomeConta(String(value))
     }
-    function habdleInputChangeValorSeparado(event: ChangeEvent<HTMLInputElement>) {
+    function handleInputChangeValorSeparado(event: ChangeEvent<HTMLInputElement>) {
         const { value } = event.target
         setValorSeparado(Number(value))
     }
-    function habdleInputChangeValorLivre(event: ChangeEvent<HTMLInputElement>) {
+    function handleInputChangeValorLivre(event: ChangeEvent<HTMLInputElement>) {
         const { value } = event.target
         setValorLivre(Number(value))
     }
@@ -192,9 +194,34 @@ const Conta: React.FC = () => {
 
         setContaEdit(contaEditRetorno)
 
+    }
+
+
+    function handleDeleteBancos(idDelete: number) {
+
+     
+
+
+        api.delete<IContas>(`conta/${idDelete}`,
+            { headers: { authorization: auth } })
+            .then(response => {
+                const resposta: any = response.data
+
+                console.log(resposta)
+                setContaAtualizar(contaAtualizar + 1)
+                alert('deletado!')
+
+            }).catch(erro => {
+                console.log(erro)
+                alert('Não enviado!')
+
+            })
 
 
     }
+
+
+
 
     return (
         <LayoutPrincipal titulo="Conta" >
@@ -217,8 +244,7 @@ const Conta: React.FC = () => {
                                     valorSeparado={conta?.valorSeparado}
                                     bancosIdFK={conta?.bancosIdFK}
                                     valorTotal={conta?.valorTotal}
-                                    idDeleteAtendimentos={(id : number)=>{
-                                        alert(`Ainda Não esta deletando o Id = ${id}. `)}}
+                                    idDeleteAtendimentos={handleDeleteBancos}
                                     idEditAtendimentos={editiContas}
 
                                 >
@@ -252,7 +278,7 @@ const Conta: React.FC = () => {
                         <DivBancos>
                             <DivSelect>
                                 <Select
-                                    onChange={habdleSelectChangeBancos}
+                                    onChange={handleSelectChangeBancos}
                                     id="empresasSelectAtendimentos" >
 
                                     <option key={0} value='0'>Seleciona a Banco!</option>
@@ -264,7 +290,7 @@ const Conta: React.FC = () => {
                                 <InputCadastro
                                     id='nomeConta'
                                     name="nomeConta"
-                                    onChange={habdleInputChangeNomeConta}
+                                    onChange={handleInputChangeNomeConta}
 
                                 >Nome da Conta</InputCadastro>
 
@@ -272,13 +298,13 @@ const Conta: React.FC = () => {
                                     id='ValorLivre'
                                     name="ValorLivre"
 
-                                    onChange={habdleInputChangeValorLivre}
+                                    onChange={handleInputChangeValorLivre}
                                 >Valor Livre</InputCadastro>
 
                                 <InputCadastro
                                     id="ValorSeparado"
                                     name="ValorSeparado"
-                                    onChange={habdleInputChangeValorSeparado}
+                                    onChange={handleInputChangeValorSeparado}
                                 >Valor Separado</InputCadastro>
 
                             </DivSelect>
