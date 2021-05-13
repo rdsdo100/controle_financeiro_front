@@ -1,24 +1,44 @@
 import React from 'react';
-import { MessageBox ,Component , ButtonMessage } from './styles'
+import Button from '../buttons/Button';
+import { TelaFlutuante, Component,  BarraSuperior, MdDeleteForeverIcon, FecharTela } from './styles'
+
+interface ITela {
 
 
 
+  telaWidth?: string
+  telaHeight?: string
+  readonly fechar: (arg0: string) => void;
 
-const MessageBoxComponent: React.FC = ({children}) => {
 
- 
- 
+}
+
+const MessageBoxComponent: React.FC<ITela> = ({ children,
+  telaWidth, telaHeight,
+  fechar }) => {
+
+  const buttonFechar = () => {
+
+    fechar("none");
+  }
+
 
   return (
 
-    <MessageBox style={{display: ""}}> 
+    <TelaFlutuante style={{ width: telaWidth, height: telaHeight }}>
+
+      <BarraSuperior >
+        <FecharTela onClick={buttonFechar}>
+          <MdDeleteForeverIcon />
+        </FecharTela>
+      </BarraSuperior>
+
       <Component>
         {children}
-        </Component> 
-        <ButtonMessage>
-       ok
-          </ButtonMessage>
-    </MessageBox>
+      </Component>
+      <Button >ok</Button>
+
+    </TelaFlutuante>
   )
 
 };

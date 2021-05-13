@@ -4,6 +4,7 @@ import CardsBancos from '../../component/cards/CardsBancos'
 import InputCadastro from '../../component/inputs/InputCadastro'
 import Select from '../../component/inputs/Select'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
+import MessageBoxComponent from '../../component/MessageBoxComponent'
 import { CardListTab, Tab, Tabs } from '../../component/TabsComponents'
 import CardRegisterTab from '../../component/TabsComponents/CardRegisterTab'
 import EditContas from '../../component/telasEdits/EditContas'
@@ -57,6 +58,7 @@ const Conta: React.FC = () => {
 
 
     const [telaVisivel, setTelaVisivel] = useState<string>("none")
+    const [telaVisivelMessage, setTelaVisivelMessage] = useState<string>("")
     const [listContas, setListContas] = useState<IContas[]>([])
     const [contaEdit, setContaEdit] = useState<IContaEdit>()
     const [listBancos, setListBancos] = useState<IBancos[]>([])
@@ -199,7 +201,7 @@ const Conta: React.FC = () => {
 
     function handleDeleteBancos(idDelete: number) {
 
-     
+
 
 
         api.delete<IContas>(`conta/${idDelete}`,
@@ -220,9 +222,6 @@ const Conta: React.FC = () => {
 
     }
 
-
-
-
     return (
         <LayoutPrincipal titulo="Conta" >
 
@@ -233,6 +232,8 @@ const Conta: React.FC = () => {
                     IdNameTab="tabListConta"
                     defaultCheckedTab  >
                     <CardListTab>
+
+
                         {
                             listContas.map((conta: any) => {
 
@@ -251,8 +252,18 @@ const Conta: React.FC = () => {
                                 </CardsBancos>
                             })}
 
+                        < div style={{ display: telaVisivelMessage }} >
+                            <MessageBoxComponent
+                                telaWidth={"40%"}
+                                telaHeight={"40%"}
+                                fechar={() => { setTelaVisivelMessage("none") }}
+                            >
+                                <p>
+                                    Teste
+</p>
 
-
+                            </MessageBoxComponent>
+                        </div>
                         < div style={{ display: telaVisivel }} >
                             <EditContas
                                 id={contaEdit?.id}
