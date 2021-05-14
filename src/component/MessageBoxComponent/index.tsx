@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../buttons/Button';
-import { TelaFlutuante, Component,  BarraSuperior, MdDeleteForeverIcon, FecharTela } from './styles'
+import { TelaFlutuante, Component,  BarraSuperior, MdDeleteForeverIcon, FecharTela, DivButton, DivMessage } from './styles'
 
 interface ITela {
 
@@ -25,6 +25,8 @@ const MessageBoxComponent: React.FC<ITela> = ({ children,
 
   return (
 
+<DivMessage>
+    
     <TelaFlutuante style={{ width: telaWidth, height: telaHeight }}>
 
       <BarraSuperior >
@@ -36,9 +38,11 @@ const MessageBoxComponent: React.FC<ITela> = ({ children,
       <Component>
         {children}
       </Component>
-      <Button >ok</Button>
-
+      <DivButton>
+      <Button style={{background: "green"}} onClick={buttonFechar} >Confirmar</Button>
+      </DivButton>
     </TelaFlutuante>
+    </DivMessage>
   )
 
 };

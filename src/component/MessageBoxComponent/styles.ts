@@ -38,6 +38,9 @@ color: ${props => props.theme.colors.white};
 
 export const TelaFlutuante = styled.div`
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   top: 50%;
   left: 50%;
   z-index: 100;
@@ -50,6 +53,11 @@ export const TelaFlutuante = styled.div`
 
 `;
 
+export const DivButton = styled.div`
+
+padding: 0 30px;
+padding-bottom: 15px
+`;
 
 
 
@@ -76,5 +84,16 @@ export const  FecharTela = styled.button`
 background-color: transparent;
     padding:0;
     margin: 0 5px;
+
+`;
+
+export const DivMessage = styled.div`
+  position: absolute;
+  background-color: rgba(0,0,0,.1);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  z-index: 99;
+
 
 `;

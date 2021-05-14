@@ -58,7 +58,8 @@ const Conta: React.FC = () => {
 
 
     const [telaVisivel, setTelaVisivel] = useState<string>("none")
-    const [telaVisivelMessage, setTelaVisivelMessage] = useState<string>("")
+    const [telaVisivelMessage, setTelaVisivelMessage] = useState<string>("none")
+    const [message, setMessage] = useState<string>(" ")
     const [listContas, setListContas] = useState<IContas[]>([])
     const [contaEdit, setContaEdit] = useState<IContaEdit>()
     const [listBancos, setListBancos] = useState<IBancos[]>([])
@@ -70,6 +71,7 @@ const Conta: React.FC = () => {
     const [valorSeparado, setValorSeparado] = useState<number>()
     const auth = localStorage.getItem('Authorization')
     const [contaAtualizar, setContaAtualizar] = useState<number>(0)
+
 
     useEffect(() => {
 
@@ -113,8 +115,9 @@ const Conta: React.FC = () => {
 
 
 
+
     function handleSelectChangeBancos(event: ChangeEvent<HTMLSelectElement>) {
-        const { name, value } = event.target
+        const { value } = event.target
 
         if (Number(value) !== 0) {
             setBancos(listBancos.find((item: IBancos) => item.id == Number(value)))
@@ -165,11 +168,11 @@ const Conta: React.FC = () => {
                 setRetornoConta(resposta)
 
                 setContaAtualizar(contaAtualizar + 1)
-                alert('Salvo!')
+                carregarMessage('Salvo!')
 
             }).catch(erro => {
                 console.log(erro)
-                alert('Não enviado!')
+                carregarMessage('Não enviado!')
 
             })
 
@@ -211,19 +214,41 @@ const Conta: React.FC = () => {
 
                 console.log(resposta)
                 setContaAtualizar(contaAtualizar + 1)
-                alert('deletado!')
+                carregarMessage('deletado!')
 
             }).catch(erro => {
                 console.log(erro)
-                alert('Não enviado!')
+                carregarMessage('Não enviado!')
 
             })
 
 
     }
 
+    function carregarMessage(message: string) {
+        setTelaVisivelMessage("")
+        setMessage(message)
+    }
+    function fecharMessage(fechar : string) {
+        setTelaVisivelMessage(fechar)
+     }
+    
+
     return (
         <LayoutPrincipal titulo="Conta" >
+
+
+
+< div style={{ display: telaVisivelMessage }} >
+                            <MessageBoxComponent
+                                telaWidth={"40%"}
+                                telaHeight={"40%"}
+                                fechar={fecharMessage}
+                            >
+                                {message}
+
+                            </MessageBoxComponent>
+                        </div>
 
             <Tab>
 
@@ -252,18 +277,7 @@ const Conta: React.FC = () => {
                                 </CardsBancos>
                             })}
 
-                        < div style={{ display: telaVisivelMessage }} >
-                            <MessageBoxComponent
-                                telaWidth={"40%"}
-                                telaHeight={"40%"}
-                                fechar={() => { setTelaVisivelMessage("none") }}
-                            >
-                                <p>
-                                    Teste
-</p>
-
-                            </MessageBoxComponent>
-                        </div>
+                        
                         < div style={{ display: telaVisivel }} >
                             <EditContas
                                 id={contaEdit?.id}
@@ -329,9 +343,6 @@ const Conta: React.FC = () => {
                     </CardRegisterTab>
 
                 </Tabs>
-
-
-
             </Tab>
 
 

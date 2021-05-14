@@ -14,16 +14,11 @@ interface IStyleMenu {
 const Menu: React.FC = () => {
 
 
-    const dispath = useDispatch()
+    //const dispath = useDispatch()
     const rotas: IRotasMenu[] = [
         { id: 1, nomeMenu: 'Home', rotaMenu: '/home' },
         { id: 2, nomeMenu: 'Conta', rotaMenu: '/conta' },
-        { id: 3, nomeMenu: 'Usuario', rotaMenu: '/usuario' }
-
-
-
-    
-        
+        { id: 3, nomeMenu: 'Usuario', rotaMenu: '/usuario' }  
       
     ]
 
@@ -34,7 +29,7 @@ const Menu: React.FC = () => {
         setListRotas(rotas)
     }, [] )
 
-    function handleChechMenu() {
+    function handleCheckMenu() {
 
         if (document.getElementById("check")) {
             (document.getElementById("check") as HTMLInputElement).checked = false;
@@ -60,7 +55,7 @@ const Menu: React.FC = () => {
 
             <DivMenu
                 style={{ display: styleMenu.displayMenu }}
-                onClick={() => { handleChechMenu() }}></DivMenu>
+                onClick={() => { handleCheckMenu() }}></DivMenu>
             <div>
                 <InputCheck type='checkbox' id='check' ></InputCheck>
                 <Label htmlFor="check">
@@ -78,7 +73,7 @@ const Menu: React.FC = () => {
 
                                 return <li
                                     key={rota.id}
-                                    onClick={() => { handleChechMenu() }}>
+                                    onClick={() => { handleCheckMenu() }}>
                                     <A
                                         to={String(rota.rotaMenu)}>
                                         {rota.nomeMenu}
