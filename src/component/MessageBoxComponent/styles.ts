@@ -7,6 +7,16 @@ import styled from 'styled-components';
 export const Component = styled.div`
 
  position: relative;
+display: flex ;
+flex-direction: row;
+justify-content: center;
+
+color:  ${props => props.theme.colors.white};
+font-size: 16pt;
+font-weight: 600;
+font-family: 'Roboto', sans-serif;
+
+
 `;
 
 export const BarraSuperior = styled.div`
