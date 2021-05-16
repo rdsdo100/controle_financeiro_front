@@ -11,10 +11,7 @@ import EditContas from '../../component/telasEdits/EditContas'
 import { api } from '../../services/api'
 import { DivBancos, DivSelect, DivImage, ImageBanco } from './styles'
 
-
-
 export interface IContas {
-
     id?: number
     valorLivre: number
     valorSeparado: number
@@ -31,7 +28,6 @@ export interface IContas {
         nomeBanco?: string
         urlImagemBanco?: string
     }
-
 }
 
 export interface IBancos {
@@ -43,7 +39,6 @@ export interface IBancos {
 
 
 export interface IContaEdit {
-
     id: number
     valorLivre: number
     valorSeparado: number
@@ -55,7 +50,6 @@ export interface IContaEdit {
 }
 
 const Conta: React.FC = () => {
-
 
     const [telaVisivel, setTelaVisivel] = useState<string>("none")
     const [telaVisivelMessage, setTelaVisivelMessage] = useState<string>("none")
@@ -71,7 +65,6 @@ const Conta: React.FC = () => {
     const [valorSeparado, setValorSeparado] = useState<number>()
     const auth = localStorage.getItem('Authorization')
     const [contaAtualizar, setContaAtualizar] = useState<number>(0)
-
 
     useEffect(() => {
 
@@ -113,9 +106,6 @@ const Conta: React.FC = () => {
 
     }, [])
 
-
-
-
     function handleSelectChangeBancos(event: ChangeEvent<HTMLSelectElement>) {
         const { value } = event.target
 
@@ -147,8 +137,6 @@ const Conta: React.FC = () => {
         setValorLivre(Number(value))
     }
 
-
-
     function clicRegisterBancos() {
         let conta: IContas = {
 
@@ -175,7 +163,6 @@ const Conta: React.FC = () => {
                 carregarMessage('Não enviado!')
 
             })
-
     }
 
     function editiContas(id: number) {
@@ -201,11 +188,7 @@ const Conta: React.FC = () => {
 
     }
 
-
     function handleDeleteBancos(idDelete: number) {
-
-
-
 
         api.delete<IContas>(`conta/${idDelete}`,
             { headers: { authorization: auth } })
@@ -214,14 +197,13 @@ const Conta: React.FC = () => {
 
                 console.log(resposta)
                 setContaAtualizar(contaAtualizar + 1)
-                carregarMessage('deletado!')
+                carregarMessage(String(resposta))
 
             }).catch(erro => {
                 console.log(erro)
                 carregarMessage('Não enviado!')
 
             })
-
 
     }
 
@@ -232,12 +214,9 @@ const Conta: React.FC = () => {
     function fecharMessage(fechar : string) {
         setTelaVisivelMessage(fechar)
      }
-    
 
     return (
         <LayoutPrincipal titulo="Conta" >
-
-
 
 < div style={{ display: telaVisivelMessage }} >
                             <MessageBoxComponent
