@@ -18,9 +18,14 @@ const Menu: React.FC = () => {
     const rotas: IRotasMenu[] = [
         { id: 1, nomeMenu: 'Home', rotaMenu: '/home' },
         { id: 2, nomeMenu: 'Conta', rotaMenu: '/conta' },
-        { id: 3, nomeMenu: 'Usuario', rotaMenu: '/usuario' }  
+        { id: 3, nomeMenu: 'Usuario', rotaMenu: '/usuario' },
+        { id: 4, nomeMenu: 'objetivos', rotaMenu: '/objetivos' },
+        { id: 5, nomeMenu: 'movimentacoes', rotaMenu: '/movimentacoes' }  
+      
+      
       
     ]
+
 
     const [listRotas, setListRotas] = useState<IRotasMenu[]>([])
     const [styleMenu, setStyleMenu] = useState<IStyleMenu>({ displayMenu: "none"  })
