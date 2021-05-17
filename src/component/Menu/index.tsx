@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { Nav, A, Label, UL, ImMenuIcons, InputCheck, Span, DivMenu } from './styles'
 
 interface IRotasMenu {
@@ -13,17 +12,12 @@ interface IStyleMenu {
 
 const Menu: React.FC = () => {
 
-
-    //const dispath = useDispatch()
     const rotas: IRotasMenu[] = [
         { id: 1, nomeMenu: 'Home', rotaMenu: '/home' },
         { id: 2, nomeMenu: 'Conta', rotaMenu: '/conta' },
         { id: 3, nomeMenu: 'Usuario', rotaMenu: '/usuario' },
-        { id: 4, nomeMenu: 'objetivos', rotaMenu: '/objetivos' },
-        { id: 5, nomeMenu: 'movimentacoes', rotaMenu: '/movimentacoes' }  
-      
-      
-      
+        { id: 4, nomeMenu: 'Objetivos', rotaMenu: '/objetivos' },
+        { id: 5, nomeMenu: 'Movimentacoes', rotaMenu: '/movimentacoes' }  
     ]
 
 
@@ -38,8 +32,6 @@ const Menu: React.FC = () => {
 
         if (document.getElementById("check")) {
             (document.getElementById("check") as HTMLInputElement).checked = false;
-          
-
         }
 
         setStyleMenu({ displayMenu: 'none' })
@@ -52,7 +44,6 @@ const Menu: React.FC = () => {
    localStorage.removeItem('Authorization')
    localStorage.removeItem('login')
    
-    
     }
 
     return (
