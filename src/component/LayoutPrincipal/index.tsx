@@ -1,14 +1,19 @@
 import React from 'react';
+import Carregamento from '../Carregamento';
 import Menu from '../Menu';
 import { BodyLayout, Container, HeadLayout , H1}  from './styles'
 
 interface ILayoutPrincipal {
   titulo: string
+  displayCarregamento?: string
 }
 
-const LayoutPrincipal: React.FC <ILayoutPrincipal> = ({children, titulo}) => {
+const LayoutPrincipal: React.FC <ILayoutPrincipal> = ({children, titulo ,  displayCarregamento = "none"}) => {
   return(
-
+<div>
+ <Carregamento
+ displayCarregamento = {displayCarregamento}
+ />
       <Container>
         <HeadLayout>
           <Menu></Menu>
@@ -23,6 +28,7 @@ const LayoutPrincipal: React.FC <ILayoutPrincipal> = ({children, titulo}) => {
         {children}
         </BodyLayout>
       </Container>
+      </div>
   )
 
 };
