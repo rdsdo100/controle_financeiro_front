@@ -1,7 +1,8 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
+import Carregamento from '../../component/Carregamento';
 import LoginServer from "../../services/LoginServer";
-import { Component,LoginBox, H2, UserBox , Input , Label , A} from './styles'
+import { Component,LoginBox, H2, UserBox , Input , Label , A, Form, Div} from './styles'
 
 const Login: React.FC = () => {
 
@@ -10,6 +11,7 @@ const Login: React.FC = () => {
     const [usuario , setUsuario] = useState<string>()
     const [senha , setSenha] = useState<string>()
     const [error , setError] = useState<string>()
+    const [carregamento , setCarregamento] = useState<string>("none")
 
     useEffect(()=>{
         localStorage.removeItem('login')
@@ -30,6 +32,7 @@ const Login: React.FC = () => {
        
         event.preventDefault()
         const loginServer= new LoginServer()
+        setCarregamento("")
         const login = await loginServer.login(String(usuario) , String(senha))
        
         localStorage.setItem('login' , String(usuario))
@@ -46,10 +49,14 @@ const Login: React.FC = () => {
 
 
 return(
+    <Div>
+
+<Carregamento displayCarregamento={carregamento} />
+
     <Component>
         <LoginBox className='login-box'>
             <H2>Login</H2>
-            <form onSubmit={handleEntrar}>
+            <Form onSubmit={handleEntrar}>
                 <UserBox className='user-box'>
                     <Input type='text' required
                            name="usuario"
@@ -68,9 +75,10 @@ return(
                 <span>{error}</span>
                 <A type='submit'
                 >Entrar</A>
-            </form>
+            </Form>
         </LoginBox>
     </Component>
+    </Div>
 )
 }
 export default Login

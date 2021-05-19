@@ -19,7 +19,15 @@ export const LoginBox = styled.div`
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
   border-radius: 10px;
+  
 
+`;
+
+export const Form  = styled.form`
+
+display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const H2 = styled.h2`
@@ -71,17 +79,19 @@ export const Label = styled.label`
 `;
 export  const  A = styled.button`
  
+ 
     position: relative;
-    display: inline-block;
-    padding: 10px 20px;
+   
+    
     color: ${props => props.theme.colors.success};
     font-size: 16px;
+    font-weight: 900;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
     transition: .5s;
     margin-top: 40px;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     background-color: transparent;
   
 
@@ -94,5 +104,8 @@ export  const  A = styled.button`
     0 0 50px #03e9f4,
     0 0 100px #03e9f4;
   }
+
+`;
+export const Div = styled.div`
 
 `;
