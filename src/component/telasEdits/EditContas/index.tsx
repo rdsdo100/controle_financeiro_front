@@ -10,8 +10,8 @@ import { Div30Conta, Div70Conta, DivLinhaConta } from './styles';
 interface IEditContas {
 
   id?: number
-  valorLivre?: number
-  valorSeparado?: number
+  corrente?: number
+  poupanca?: number
   ativo?: boolean
   bloqueado?: boolean
   nomeConta?: string
@@ -24,8 +24,8 @@ interface IEditContas {
 
 const EditContas: React.FC<IEditContas> = ({
   id,
-  valorLivre,
-  valorSeparado,
+  corrente,
+  poupanca,
   ativo,
   bloqueado,
   nomeConta,
@@ -34,8 +34,8 @@ const EditContas: React.FC<IEditContas> = ({
   retornoEdit
 }) => {
 
-  const [valorlivreEdit, setValorLivreEdit] = useState<number>()
-  const [valorSeparadoEdit, setValorSeparadoEdit] = useState<number>()
+  const [correnteEdit, setCorrenteEdit] = useState<number>()
+  const [poupancaEdit, setPoupancaEdit] = useState<number>()
   const [ativoEdit, setAtivoEdit] = useState<boolean>()
   const [bloqueadoEdit, setBloqueadoEdit] = useState<boolean>()
   const [nomeContaEdit, setNomeContaEdit] = useState<string>()
@@ -45,13 +45,13 @@ const EditContas: React.FC<IEditContas> = ({
     const { value } = event.target
     setNomeContaEdit(String(value))
   }
-  function habdleInputChangeValorSeparado(event: ChangeEvent<HTMLInputElement>) {
+  function habdleInputChangePoupanca(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    setValorSeparadoEdit(Number(value))
+    setPoupancaEdit(Number(value))
   }
-  function habdleInputChangeValorLivre(event: ChangeEvent<HTMLInputElement>) {
+  function habdleInputChangeCorrente(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    setValorLivreEdit(Number(value))
+    setCorrenteEdit(Number(value))
   }
 
   function habdleInputChangeAtivo(event: ChangeEvent<HTMLInputElement>) {
@@ -68,8 +68,8 @@ const EditContas: React.FC<IEditContas> = ({
 
     let editConta = {
       id: 0,
-      valorLivre: valorlivreEdit,
-      valorSeparado: valorSeparadoEdit,
+      corrente: correnteEdit,
+      poupanca : poupancaEdit,
       ativo: ativoEdit,
       bloqueado: bloqueadoEdit,
       nomeConta: nomeContaEdit,
@@ -77,8 +77,8 @@ const EditContas: React.FC<IEditContas> = ({
 
     if (
       editConta.id !== 0 ||
-      editConta.valorLivre ||
-      editConta.valorSeparado ||
+      editConta.corrente ||
+      editConta.poupanca ||
       editConta.ativo ||
       editConta.bloqueado ||
       editConta.nomeConta
@@ -112,8 +112,8 @@ const EditContas: React.FC<IEditContas> = ({
   function limparCamposObj() {
 
     id = 0
-    setValorLivreEdit(undefined)
-    setValorSeparadoEdit(undefined)
+    setCorrenteEdit(undefined)
+    setPoupancaEdit(undefined)
     setAtivoEdit(undefined)
     setBloqueadoEdit(undefined)
     setNomeContaEdit(undefined)
@@ -162,16 +162,16 @@ const EditContas: React.FC<IEditContas> = ({
         <InputCadastro
           id='ValorLivreEdit'
           name="ValorLivreEdit"
-          onChange={habdleInputChangeValorLivre}
-          defaultValue={valorLivre}
-        >Valor Livre</InputCadastro>
+          onChange={habdleInputChangeCorrente}
+          defaultValue={corrente}
+        >Conta Correte</InputCadastro>
 
         <InputCadastro
           id="ValorSeparadoEdit"
           name="ValorSeparadoEdit"
-          onChange={habdleInputChangeValorSeparado}
-          defaultValue={valorSeparado}
-        >Valor Separado</InputCadastro>
+          onChange={habdleInputChangePoupanca}
+          defaultValue={poupanca}
+        >Conta Poupança</InputCadastro>
       </DivLinhaConta>
       <DivLinhaConta>
         <Toggle

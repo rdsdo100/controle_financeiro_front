@@ -13,8 +13,8 @@ import {
 
 interface IContasCard {
   id: number
-  valorLivre: number
-  valorSeparado: number
+  corrente: number
+  poupanca: number
   valorTotal?: number
   ativo?: boolean
   bloqueado?: boolean
@@ -39,8 +39,8 @@ interface IContasCard {
 const CardsBancos: React.FC<IContasCard> = ({ children,
   id,
   nomeConta,
-  valorLivre,
-  valorSeparado,
+  corrente,
+  poupanca,
   valorTotal,
   bancosIdFK,
   idDeleteAtendimentos,
@@ -70,8 +70,8 @@ const buttonEditdId = () => {
       <DivBodyBanco>
         <Titulos> {nomeConta}</Titulos>
         <SubTitulos>Valor Total: {valorTotal}</SubTitulos>
-        <Nomes>Valor livre: {valorLivre}</Nomes>
-        <Nomes>Valor separado: {valorSeparado}</Nomes>
+        <Nomes>Conta Corrente: {corrente}</Nomes>
+        <Nomes>Conta Poupança: {poupanca}</Nomes>
 
       </DivBodyBanco>
 

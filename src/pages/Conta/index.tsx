@@ -13,8 +13,8 @@ import { DivBancos, DivSelect, DivImage, ImageBanco } from './styles'
 
 export interface IContas {
     id?: number
-    valorLivre: number
-    valorSeparado: number
+    corrente: number
+    poupanca: number
     valorTotal?: number
     ativo?: boolean
     bloqueado?: boolean
@@ -40,8 +40,8 @@ export interface IBancos {
 
 export interface IContaEdit {
     id: number
-    valorLivre: number
-    valorSeparado: number
+    corrente: number
+    poupanca: number
     ativo: boolean
     bloqueado: boolean
     nomeConta: string
@@ -61,8 +61,8 @@ const Conta: React.FC = () => {
     const [retornoConta, setRetornoConta] = useState<IContas>()
     const [idBanco, setIdBanco] = useState<number>()
     const [nomeConta, setNomeConta] = useState<string>()
-    const [valorLivre, setValorLivre] = useState<number>()
-    const [valorSeparado, setValorSeparado] = useState<number>()
+    const [corrente, setCorrente] = useState<number>()
+    const [poupanca, setPoupanca] = useState<number>()
     const auth = localStorage.getItem('Authorization')
     const [contaAtualizar, setContaAtualizar] = useState<number>(0)
 
@@ -128,21 +128,21 @@ const Conta: React.FC = () => {
         const { value } = event.target
         setNomeConta(String(value))
     }
-    function handleInputChangeValorSeparado(event: ChangeEvent<HTMLInputElement>) {
+    function handleInputChangePoupanca(event: ChangeEvent<HTMLInputElement>) {
         const { value } = event.target
-        setValorSeparado(Number(value))
+        setPoupanca(Number(value))
     }
-    function handleInputChangeValorLivre(event: ChangeEvent<HTMLInputElement>) {
+    function handleInputChangeCorrente(event: ChangeEvent<HTMLInputElement>) {
         const { value } = event.target
-        setValorLivre(Number(value))
+        setCorrente(Number(value))
     }
 
     function clicRegisterBancos() {
         let conta: IContas = {
 
             nomeConta: String(nomeConta),
-            valorLivre: Number(valorLivre),
-            valorSeparado: Number(valorSeparado),
+            corrente: Number(corrente),
+            poupanca: Number(poupanca),
             bancosIdFK: {
                 id: Number(idBanco)
             }
@@ -174,8 +174,8 @@ const Conta: React.FC = () => {
 
         contaEditRetorno = {
             id: Number(conta.id),
-            valorLivre: Number(conta.valorLivre),
-            valorSeparado: Number(conta.valorSeparado),
+            corrente: Number(conta.corrente),
+            poupanca: Number(conta.poupanca),
             ativo: Boolean(conta.ativo),
             bloqueado: Boolean(conta.bloqueado),
             nomeConta: String(conta.nomeConta),
@@ -245,8 +245,8 @@ const Conta: React.FC = () => {
                                     key={conta?.id}
                                     id={conta.id}
                                     nomeConta={conta?.nomeConta}
-                                    valorLivre={conta?.valorLivre}
-                                    valorSeparado={conta?.valorSeparado}
+                                    corrente={conta?.corrente}
+                                    poupanca={conta?.poupanca}
                                     bancosIdFK={conta?.bancosIdFK}
                                     valorTotal={conta?.valorTotal}
                                     idDeleteAtendimentos={handleDeleteBancos}
@@ -260,8 +260,8 @@ const Conta: React.FC = () => {
                         < div style={{ display: telaVisivel }} >
                             <EditContas
                                 id={contaEdit?.id}
-                                valorLivre={contaEdit?.valorLivre}
-                                valorSeparado={contaEdit?.valorSeparado}
+                                corrente={contaEdit?.corrente}
+                                poupanca={contaEdit?.poupanca}
                                 ativo={contaEdit?.ativo}
                                 bloqueado={contaEdit?.bloqueado}
                                 nomeConta={contaEdit?.nomeConta}
@@ -302,13 +302,13 @@ const Conta: React.FC = () => {
                                     id='ValorLivre'
                                     name="ValorLivre"
 
-                                    onChange={handleInputChangeValorLivre}
+                                    onChange={handleInputChangeCorrente}
                                 >Valor Livre</InputCadastro>
 
                                 <InputCadastro
                                     id="ValorSeparado"
                                     name="ValorSeparado"
-                                    onChange={handleInputChangeValorSeparado}
+                                    onChange={handleInputChangePoupanca}
                                 >Valor Separado</InputCadastro>
 
                             </DivSelect>
