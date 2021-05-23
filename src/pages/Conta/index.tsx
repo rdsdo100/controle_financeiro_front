@@ -65,6 +65,7 @@ const Conta: React.FC = () => {
     const [poupanca, setPoupanca] = useState<number>()
     const auth = localStorage.getItem('Authorization')
     const [contaAtualizar, setContaAtualizar] = useState<number>(0)
+    const [carregar, setCarregar] = useState<string>(" ")
 
     useEffect(() => {
 
@@ -82,6 +83,7 @@ const Conta: React.FC = () => {
             .then(response => {
                 const resposta: any = response.data
                 setListContas(resposta)
+                setCarregar("none")
 
             })
             .catch(erro => {
@@ -149,6 +151,7 @@ const Conta: React.FC = () => {
 
         }
 
+        setCarregar("")
         api.post<IContas>('conta', conta,
             { headers: { authorization: auth } })
             .then(response => {
@@ -156,6 +159,7 @@ const Conta: React.FC = () => {
                 setRetornoConta(resposta)
 
                 setContaAtualizar(contaAtualizar + 1)
+               
                 carregarMessage('Salvo!')
 
             }).catch(erro => {
@@ -196,7 +200,9 @@ const Conta: React.FC = () => {
                 const resposta: any = response.data
 
                 console.log(resposta)
+
                 setContaAtualizar(contaAtualizar + 1)
+                setCarregar("")
                 carregarMessage(String(resposta))
 
             }).catch(erro => {
@@ -208,26 +214,27 @@ const Conta: React.FC = () => {
     }
 
     function carregarMessage(message: string) {
+        setCarregar("none")
         setTelaVisivelMessage("")
         setMessage(message)
     }
-    function fecharMessage(fechar : string) {
+    function fecharMessage(fechar: string) {
         setTelaVisivelMessage(fechar)
-     }
+    }
 
     return (
-        <LayoutPrincipal titulo="Conta" >
+        <LayoutPrincipal displayCarregamento={carregar} titulo="Conta" >
 
-< div style={{ display: telaVisivelMessage }} >
-                            <MessageBoxComponent
-                                telaWidth={"40%"}
-                                telaHeight={"40%"}
-                                fechar={fecharMessage}
-                            >
-                                {message}
+            < div style={{ display: telaVisivelMessage }} >
+                <MessageBoxComponent
+                    telaWidth={"40%"}
+                    telaHeight={"40%"}
+                    fechar={fecharMessage}
+                >
+                    {message}
 
-                            </MessageBoxComponent>
-                        </div>
+                </MessageBoxComponent>
+            </div>
 
             <Tab>
 
@@ -256,7 +263,7 @@ const Conta: React.FC = () => {
                                 </CardsBancos>
                             })}
 
-                        
+
                         < div style={{ display: telaVisivel }} >
                             <EditContas
                                 id={contaEdit?.id}

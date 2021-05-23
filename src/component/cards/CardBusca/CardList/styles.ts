@@ -20,7 +20,7 @@ border-radius: 5px;
 
 export const CardListComponent = styled.ul`
 position: relative;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 135px);
     
     margin: 0;
 display: flex;
