@@ -3,7 +3,7 @@ import { Card ,CardListComponent  }  from './styles'
 
 interface IStyle {
 
-  cardListComponentStyle: string
+  cardListComponentStyle?: string
 }
 
 const CardList: React.FC <IStyle> = ({children , cardListComponentStyle = "135px"}) => {
