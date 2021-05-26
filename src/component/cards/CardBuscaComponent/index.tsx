@@ -1,20 +1,18 @@
 import React from 'react';
-import CardItens from './CardItens';
-import CardList from './CardList';
+import CardFooter from './CardFooter';
+import CardHead from './CardHead';
+import CardListBody from './CardListBody';
 
+const CardBuscaComponent: React.FC = ({ children }) => {
 
-const CardBuscaComponent: React.FC = ({ children}) => {
+    return (
 
-
-
-  return (
-
-<div>
-  <CardItens></CardItens>
-  <CardList></CardList>
-</div>
-
-  )
+        <div>
+            <CardHead></CardHead>
+            <CardListBody>{children}</CardListBody>
+            <CardFooter></CardFooter>
+        </div>
+    )
 
 };
 
