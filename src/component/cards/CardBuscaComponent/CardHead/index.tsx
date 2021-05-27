@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from './styles';
 
 
 
@@ -10,7 +11,9 @@ const CardHead: React.FC = ({ children}) => {
 
   return (
 
-   <div></div>
+   <Container>
+     {children}
+   </Container>
   )
 
 };

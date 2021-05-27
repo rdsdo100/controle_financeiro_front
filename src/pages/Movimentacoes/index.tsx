@@ -38,29 +38,15 @@ const Movimentacoes: React.FC = () => {
     </MessageBoxComponent>
 </div>
 
-<Tab>
-
-    <Tabs
-        text='Lista de Movimentacoes'
-        IdNameTab="tabListMovimentacoes"
-        defaultCheckedTab  >
 
 <CardBuscaComponent></CardBuscaComponent>
 
-        </Tabs>
-
-
-
-
-
-    <Tabs
-        text='Cadastro Movimentacoes'
-        IdNameTab="tabRegisterMovimentacoes"
-    >
        
 
-    </Tabs>
-</Tab>
+
+
+
+
 
 
 </LayoutPrincipal>
