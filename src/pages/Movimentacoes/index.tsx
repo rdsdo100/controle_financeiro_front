@@ -3,7 +3,6 @@ import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
 import CardsMovimentacoes from '../../component/cards/CardsMovimentacoes'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
 import MessageBoxComponent from '../../component/MessageBoxComponent'
-import TelasMovimentacoesRegterUpdate from '../../component/TelasMovimentacoesRegterUpdate/EditContas'
 import { api } from '../../services/api'
 
 interface IMovimentacoes {
@@ -20,7 +19,7 @@ interface IMovimentacoes {
 
 const Movimentacoes: React.FC = () => {
 
-    const [telasMovimentacoesRegterUpdate, setTelasMovimentacoesRegterUpdate] = useState<string>("")
+    const [telasMovimentacoes, setTelasMovimentacoes] = useState<string>("")
     const [telaVisivel, setTelaVisivel] = useState<string>("none")
     const [telaVisivelMessage, setTelaVisivelMessage] = useState<string>("none")
     const [message, setMessage] = useState<string>(" ")
@@ -64,7 +63,7 @@ const Movimentacoes: React.FC = () => {
 
 <LayoutPrincipal displayCarregamento={carregar} titulo="Movimentacões" >
 
-{/*<TelasMovimentacoesRegterUpdate></TelasMovimentacoesRegterUpdate>*/}
+{/*<TelasMovimentacoes></TelasMovimentacoes>*/}
 
 
 < div style={{ display: telaVisivelMessage }} >

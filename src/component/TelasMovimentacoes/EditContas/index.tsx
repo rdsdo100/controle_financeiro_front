@@ -18,7 +18,7 @@ interface IMovimentacoes {
 }
 
 
-const TelasMovimentacoesRegterUpdate: React.FC = () => {
+const TelasMovimentacoes: React.FC = () => {
 
   const [correnteEdit, setCorrenteEdit] = useState<number>()
   const [poupancaEdit, setPoupancaEdit] = useState<number>()
@@ -119,4 +119,4 @@ const TelasMovimentacoesRegterUpdate: React.FC = () => {
   )
 };
 
-export default TelasMovimentacoesRegterUpdate;
+export default TelasMovimentacoes;
