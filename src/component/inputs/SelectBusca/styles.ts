@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.select`
      width: 100%;
-  padding: 10px 0;
+  padding: 0;
+
   font-size: 14px;
   color: ${props => props.theme.colors.gray};
   border-radius: 8px;

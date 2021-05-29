@@ -1,8 +1,21 @@
 import React, { useState } from 'react'
 import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
+import CardsMovimentacoes from '../../component/cards/CardsMovimentacoes'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
 import MessageBoxComponent from '../../component/MessageBoxComponent'
-import { Tab, Tabs } from '../../component/TabsComponents'
+import { api } from '../../services/api'
+
+interface IMovimentacoes {
+    dataEstorno?: boolean
+    dataMovimento?: Date
+    descricao?: string
+    estorno?: true
+    id: number
+    nomeMovimentacoes?: string
+    tipoEntrada?: true
+    valorContaAnterior?: number
+    valorMovimento?: number
+  }
 
 const Movimentacoes: React.FC = () => {
 
@@ -12,7 +25,29 @@ const Movimentacoes: React.FC = () => {
     const auth = localStorage.getItem('Authorization')
     const [movimentacoesAtualizar, setMovimentacoesAtualizar] = useState<number>(0)
     const [carregar, setCarregar] = useState<string>("none")
+    const [monimentacoes , setMonimentacoes ] = useState<IMovimentacoes[]>([])
 
+    async function buscarmovimentacoes(){
+
+        setCarregar("")
+
+        api.get('movimentacoes/busca-user',
+        { headers: { authorization: auth } })
+        .then(response => {
+            const resposta: any = response.data
+            setMonimentacoes(resposta)
+
+            setCarregar("none")
+            carregarMessage("Buscou")
+
+        })
+        .catch(erro => {
+            alert('Erro ao acessar servidor!')
+
+        })
+
+
+    }
 
     function carregarMessage(message: string) {
         setCarregar("none")
@@ -39,7 +74,21 @@ const Movimentacoes: React.FC = () => {
 </div>
 
 
-<CardBuscaComponent></CardBuscaComponent>
+<CardBuscaComponent clickBusca ={buscarmovimentacoes}>
+
+{monimentacoes.map((item : IMovimentacoes)=>{
+
+return <CardsMovimentacoes 
+
+id={ item.id}
+  idDeleteAtendimentos = {()=>{}} 
+  idEditAtendimentos = {()=>{}}
+></CardsMovimentacoes>
+
+})}
+
+
+</CardBuscaComponent>
 
        
 
