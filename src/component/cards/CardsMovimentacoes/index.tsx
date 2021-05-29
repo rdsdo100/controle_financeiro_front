@@ -49,8 +49,7 @@ const buttonEditdId = () => {
   return (
     <Container>
 
-     
-
+    
       <DivBodyBanco>
        {id}
 
