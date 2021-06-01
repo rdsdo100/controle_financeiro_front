@@ -6,7 +6,6 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: center;
     height: 50px;
-    border: 1px solid white;
     padding:  0 10px ;
     border-radius: 8px;
 `;

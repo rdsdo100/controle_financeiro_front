@@ -1,5 +1,6 @@
 import React from 'react';
 import { IContas } from '../../../pages/Conta';
+import { H1 } from '../../LayoutPrincipal/styles';
 
 import {
   ButtonCardBancos, Container,
@@ -29,6 +30,7 @@ interface IMovimentacoesCard {
 
 const CardsMovimentacoes: React.FC<IMovimentacoesCard> = ({ children,
   id,
+  nomeMovimentacoes,
   idDeleteAtendimentos,
   idEditAtendimentos
   
@@ -50,9 +52,8 @@ const buttonEditdId = () => {
     <Container>
 
     
-      <DivBodyBanco>
-       {id}
-
+      <DivBodyBanco>     
+<H1>{`${id} - ${nomeMovimentacoes}  `}</H1>
       </DivBodyBanco>
 
       <DivButtons>

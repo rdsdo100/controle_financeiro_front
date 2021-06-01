@@ -7,7 +7,7 @@ export const Container = styled.div`
 export const Card = styled.div`
 position: relative;
 border-radius: 5px;  
-    border: black 2px solid;
+   
  display: flex;
   flex-direction: column;
   box-sizing:border-box;

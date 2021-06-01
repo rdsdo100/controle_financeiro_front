@@ -87,6 +87,7 @@ const Movimentacoes: React.FC = () => {
 return <CardsMovimentacoes 
 
 id={ item.id}
+nomeMovimentacoes = {item.nomeMovimentacoes}
   idDeleteAtendimentos = {()=>{}} 
   idEditAtendimentos = {()=>{}}
 ></CardsMovimentacoes>
