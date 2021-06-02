@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
 import CardsMovimentacoes from '../../component/cards/CardsMovimentacoes'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
-import MessageBoxComponent from '../../component/MessageBoxComponent'
+import EditMovimentacoes from '../../component/telasEdits/EditMovimentacoes'
 import { api } from '../../services/api'
+import { DivEditMovimentacoes, ItemLista, Lista } from './styles'
 
 interface IMovimentacoes {
     dataEstorno?: boolean
@@ -39,7 +40,7 @@ const Movimentacoes: React.FC = () => {
             setMonimentacoes(resposta)
 
             setCarregar("none")
-            carregarMessage("Buscou")
+          
 
         })
         .catch(erro => {
@@ -50,59 +51,43 @@ const Movimentacoes: React.FC = () => {
 
     }
 
-    function carregarMessage(message: string) {
-        setCarregar("none")
-        setTelaVisivelMessage("")
-        setMessage(message)
-    }
-    function fecharMessage(fechar: string) {
-        setTelaVisivelMessage(fechar)
-    }
+
 
     return (
 
 <LayoutPrincipal displayCarregamento={carregar} titulo="Movimentacões" >
 
-{/*<TelasMovimentacoes></TelasMovimentacoes>*/}
+<DivEditMovimentacoes style = {{display: telaVisivel}}>
+<EditMovimentacoes
+  fechar ={() => {setTelaVisivel("none")}} />
+
+</DivEditMovimentacoes>
 
 
-< div style={{ display: telaVisivelMessage }} >
-    <MessageBoxComponent
-        telaWidth={"40%"}
-        telaHeight={"40%"}
-        fechar={fecharMessage}
-    >
-        {message}
 
-    </MessageBoxComponent>
-</div>
 
 
 <CardBuscaComponent clickBusca ={buscarmovimentacoes}>
 
 
-
+<Lista>
 {monimentacoes.map((item : IMovimentacoes)=>{
 
-return <CardsMovimentacoes 
+return <ItemLista key = {item.id}>
+<CardsMovimentacoes 
 
 id={ item.id}
 nomeMovimentacoes = {item.nomeMovimentacoes}
   idDeleteAtendimentos = {()=>{}} 
   idEditAtendimentos = {()=>{}}
 ></CardsMovimentacoes>
+</ItemLista> 
 
 })}
+</Lista>
 
 
 </CardBuscaComponent>
-
-       
-
-
-
-
-
 
 
 </LayoutPrincipal>
