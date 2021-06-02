@@ -16,7 +16,7 @@ interface IMovimentacoes {
     tipoEntrada?: true
     valorContaAnterior?: number
     valorMovimento?: number
-  }
+}
 
 const Movimentacoes: React.FC = () => {
 
@@ -27,82 +27,70 @@ const Movimentacoes: React.FC = () => {
     const auth = localStorage.getItem('Authorization')
     const [movimentacoesAtualizar, setMovimentacoesAtualizar] = useState<number>(0)
     const [carregar, setCarregar] = useState<string>("none")
-    const [monimentacoes , setMonimentacoes ] = useState<IMovimentacoes[]>([])
-
-useEffect(()=>{
-
-  setCarregar("")
-
-        api.get('movimentacoes/busca-user',
-        { headers: { authorization: auth } })
-        .then(response => {
-            const resposta: any = response.data
-            setMonimentacoes(resposta)
-
-            setCarregar("none")
-        })
-        .catch(erro => {
-            alert('Erro ao acessar servidor!')
-
-        })
+    const [monimentacoes, setMonimentacoes] = useState<IMovimentacoes[]>([])
 
 
-
-} , [])
-
-
-    async function buscarmovimentacoes(){
-
+    function buscarObjetivos() {
         setCarregar("")
 
         api.get('movimentacoes/busca-user',
-        { headers: { authorization: auth } })
-        .then(response => {
-            const resposta: any = response.data
-            setMonimentacoes(resposta)
+            { headers: { authorization: auth } })
+            .then(response => {
+                const resposta: any = response.data
+                setMonimentacoes(resposta)
 
-            setCarregar("none")
-        })
-        .catch(erro => {
-            alert('Erro ao acessar servidor!')
+                setCarregar("none")
+            })
+            .catch(erro => {
+                alert('Erro ao acessar servidor!')
 
-        })
+            })
+    }
 
+
+
+    useEffect(() => {
+        buscarObjetivos()
+    }, [])
+
+
+    async function buscarmovimentacoes() {
+        buscarObjetivos()
     }
 
     return (
 
-<LayoutPrincipal displayCarregamento={carregar} titulo="Movimentacões" >
+        <LayoutPrincipal displayCarregamento={carregar} titulo="Movimentacões" >
 
-<DivEditMovimentacoes style = {{display: telaVisivel}}>
-<EditMovimentacoes
-  fechar ={() => {setTelaVisivel("none")}} />
+            <DivEditMovimentacoes style={{ display: telaVisivel }}>
+                <EditMovimentacoes
+                    fechar={() => { setTelaVisivel("none") }} />
 
-</DivEditMovimentacoes>
+            </DivEditMovimentacoes>
 
-<CardBuscaComponent clickBusca ={buscarmovimentacoes} clickNovo={()=>{setTelaVisivel("")}} >
+            <CardBuscaComponent clickBusca={buscarmovimentacoes} clickNovo={() => { setTelaVisivel("") }} >
 
-<Lista>
-{monimentacoes.map((item : IMovimentacoes)=>{
+                <Lista>
+                    {monimentacoes.map((item: IMovimentacoes) => {
 
-return <ItemLista key = {item.id}>
-<CardsMovimentacoes 
+                        return <ItemLista key={item.id}>
+                            <CardsMovimentacoes
 
-id={ item.id}
-nomeMovimentacoes = {item.nomeMovimentacoes}
-  idDeleteAtendimentos = {()=>{}} 
-  idEditAtendimentos = {()=>{}}
-></CardsMovimentacoes>
-</ItemLista> 
+                                id={item.id}
+                                nomeMovimentacoes={item.nomeMovimentacoes}
+                                idDeleteAtendimentos={() => { }}
+                                idEditAtendimentos={() => { }}
+                            ></CardsMovimentacoes>
+                        </ItemLista>
 
-})}
-</Lista>
-
-
-</CardBuscaComponent>
+                    })}
+                </Lista>
 
 
-</LayoutPrincipal>
+            </CardBuscaComponent>
+
+
+        </LayoutPrincipal>
 
 
 

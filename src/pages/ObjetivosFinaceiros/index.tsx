@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
 import CardsMovimentacoes from '../../component/cards/CardsMovimentacoes'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
-import MessageBoxComponent from '../../component/MessageBoxComponent'
+import EditMovimentacoes from '../../component/telasEdits/EditMovimentacoes'
 import { api } from '../../services/api'
-
+import { DivEditMovimentacoes, Lista, ItemLista } from '../Movimentacoes/styles'
 
 
 interface IMovimentacoes {
@@ -17,10 +17,10 @@ interface IMovimentacoes {
     tipoEntrada?: true
     valorContaAnterior?: number
     valorMovimento?: number
-  }
+}
 
 const ObjetivosFinaceiros: React.FC = () => {
-   
+
     const [telasMovimentacoes, setTelasMovimentacoes] = useState<string>("")
     const [telaVisivel, setTelaVisivel] = useState<string>("none")
     const [telaVisivelMessage, setTelaVisivelMessage] = useState<string>("none")
@@ -28,89 +28,72 @@ const ObjetivosFinaceiros: React.FC = () => {
     const auth = localStorage.getItem('Authorization')
     const [movimentacoesAtualizar, setMovimentacoesAtualizar] = useState<number>(0)
     const [carregar, setCarregar] = useState<string>("none")
-    const [monimentacoes , setMonimentacoes ] = useState<IMovimentacoes[]>([])
+    const [monimentacoes, setMonimentacoes] = useState<IMovimentacoes[]>([])
 
-    async function buscarmovimentacoes(){
 
+    function buscarObjetivos() {
         setCarregar("")
 
         api.get('movimentacoes/busca-user',
-        { headers: { authorization: auth } })
-        .then(response => {
-            const resposta: any = response.data
-            setMonimentacoes(resposta)
+            { headers: { authorization: auth } })
+            .then(response => {
+                const resposta: any = response.data
+                setMonimentacoes(resposta)
 
-            setCarregar("none")
-            carregarMessage("Buscou")
+                setCarregar("none")
+            })
+            .catch(erro => {
+                alert('Erro ao acessar servidor!')
 
-        })
-        .catch(erro => {
-            alert('Erro ao acessar servidor!')
-
-        })
-
-
+            })
     }
 
-    function carregarMessage(message: string) {
-        setCarregar("none")
-        setTelaVisivelMessage("")
-        setMessage(message)
-    }
-    function fecharMessage(fechar: string) {
-        setTelaVisivelMessage(fechar)
+    useEffect(() => {
+        buscarObjetivos()
+    }, [])
+
+
+    async function buscarmovimentacoes() {
+        buscarObjetivos()
     }
 
     return (
 
-<LayoutPrincipal displayCarregamento={carregar} titulo="Movimentacões" >
+        <LayoutPrincipal displayCarregamento={carregar} titulo="Objetivos Finaceiros" >
 
-{/*<TelasMovimentacoes></TelasMovimentacoes>*/}
+            <DivEditMovimentacoes style={{ display: telaVisivel }}>
+                <EditMovimentacoes
+                    fechar={() => { setTelaVisivel("none") }} />
 
+            </DivEditMovimentacoes>
 
-< div style={{ display: telaVisivelMessage }} >
-    <MessageBoxComponent
-        telaWidth={"40%"}
-        telaHeight={"40%"}
-        fechar={fecharMessage}
-    >
-        {message}
+            <CardBuscaComponent clickBusca={buscarmovimentacoes} clickNovo={() => { setTelaVisivel("") }} >
 
-    </MessageBoxComponent>
-</div>
+                <Lista>
+                    {monimentacoes.map((item: IMovimentacoes) => {
 
+                        return <ItemLista key={item.id}>
+                            <CardsMovimentacoes
 
-<CardBuscaComponent clickBusca ={buscarmovimentacoes}>
+                                id={item.id}
+                                nomeMovimentacoes={item.nomeMovimentacoes}
+                                idDeleteAtendimentos={() => { }}
+                                idEditAtendimentos={() => { }}
+                            ></CardsMovimentacoes>
+                        </ItemLista>
 
-
-
-{monimentacoes.map((item : IMovimentacoes)=>{
-
-return <CardsMovimentacoes 
-
-id={ item.id}
-  idDeleteAtendimentos = {()=>{}} 
-  idEditAtendimentos = {()=>{}}
-></CardsMovimentacoes>
-
-})}
+                    })}
+                </Lista>
 
 
-</CardBuscaComponent>
-
-       
+            </CardBuscaComponent>
 
 
-
-
-
-
-
-</LayoutPrincipal>
+        </LayoutPrincipal>
 
 
 
     )
-        
+
 }
 export default ObjetivosFinaceiros
