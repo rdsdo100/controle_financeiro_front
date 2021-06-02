@@ -10,17 +10,23 @@ import { Div30, Div40 } from './styles';
 
 interface IMovimentacoes {
     readonly clickBusca: () => void;
+    readonly clickNovo: () => void;
 
 }
 
-const CardBuscaComponent: React.FC <IMovimentacoes> = ({ children ,clickBusca }) => {
+const CardBuscaComponent: React.FC <IMovimentacoes> = ({ children ,clickBusca, clickNovo }) => {
 
 
 
 
-    const buttonDeleteId = () => {
+    const buttonbuscar = () => {
 
         clickBusca()       
+    }
+
+    const buttonnovo = () => {
+
+        clickNovo()       
     }
 
     return (
@@ -28,7 +34,7 @@ const CardBuscaComponent: React.FC <IMovimentacoes> = ({ children ,clickBusca })
         <div>
             <CardHead>
                <Div30>
-                    <ButtonBusca  style={{background: 'blue'}} >Novo</ButtonBusca>
+                    <ButtonBusca  onClick={buttonnovo} style={{background: 'blue'}} >Novo</ButtonBusca>
                     </Div30>
                    
                     <Div40>
@@ -44,7 +50,7 @@ const CardBuscaComponent: React.FC <IMovimentacoes> = ({ children ,clickBusca })
                     
                     <Div30 >
 
-                    <ButtonBusca onClick={buttonDeleteId} >Buscar</ButtonBusca>
+                    <ButtonBusca onClick={buttonbuscar} >Buscar</ButtonBusca>
                     </Div30>
             </CardHead>
             <CardListBody cardListComponentStyle="150px">{children}</CardListBody>

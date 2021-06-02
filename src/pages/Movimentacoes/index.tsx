@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
 import CardsMovimentacoes from '../../component/cards/CardsMovimentacoes'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
@@ -29,6 +29,28 @@ const Movimentacoes: React.FC = () => {
     const [carregar, setCarregar] = useState<string>("none")
     const [monimentacoes , setMonimentacoes ] = useState<IMovimentacoes[]>([])
 
+useEffect(()=>{
+
+  setCarregar("")
+
+        api.get('movimentacoes/busca-user',
+        { headers: { authorization: auth } })
+        .then(response => {
+            const resposta: any = response.data
+            setMonimentacoes(resposta)
+
+            setCarregar("none")
+        })
+        .catch(erro => {
+            alert('Erro ao acessar servidor!')
+
+        })
+
+
+
+} , [])
+
+
     async function buscarmovimentacoes(){
 
         setCarregar("")
@@ -40,18 +62,13 @@ const Movimentacoes: React.FC = () => {
             setMonimentacoes(resposta)
 
             setCarregar("none")
-          
-
         })
         .catch(erro => {
             alert('Erro ao acessar servidor!')
 
         })
 
-
     }
-
-
 
     return (
 
@@ -63,12 +80,7 @@ const Movimentacoes: React.FC = () => {
 
 </DivEditMovimentacoes>
 
-
-
-
-
-<CardBuscaComponent clickBusca ={buscarmovimentacoes}>
-
+<CardBuscaComponent clickBusca ={buscarmovimentacoes} clickNovo={()=>{setTelaVisivel("")}} >
 
 <Lista>
 {monimentacoes.map((item : IMovimentacoes)=>{

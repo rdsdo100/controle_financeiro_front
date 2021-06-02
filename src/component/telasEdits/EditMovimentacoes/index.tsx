@@ -6,6 +6,7 @@ interface IEditContas {
 
 
   readonly fechar: (arg0: string) => void;
+
  
 }
 
@@ -26,6 +27,7 @@ const EditMovimentacoes: React.FC<IEditContas> = ({
 
     fechar("none");
   }
+
 
   return (
     <TelasFlutuantes
