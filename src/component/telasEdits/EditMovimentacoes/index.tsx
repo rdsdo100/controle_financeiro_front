@@ -1,17 +1,31 @@
 import React, { ChangeEvent } from 'react';
+import Button from '../../buttons/Button';
 import TelasFlutuantes from '../../TelasFlutuantes';
+import { DivButton, DivButtons, DivComponent, FormComponent } from './styles';
 
+interface IMovimentacoes {
+  dataEstorno?: boolean
+  dataMovimento?: Date
+  descricao?: string
+  estorno?: true
+  id?: number
+  nomeMovimentacoes?: string
+  tipoEntrada?: true
+  valorContaAnterior?: number
+  valorMovimento?: number
+}
 
-interface IEditContas {
-
+interface IEditMovimentacoes {
+  editMoviemtacoes?: boolean
+  movimentacoes?: IMovimentacoes
 
   readonly fechar: (arg0: string) => void;
 
- 
+
 }
 
-const EditMovimentacoes: React.FC<IEditContas> = ({
-
+const EditMovimentacoes: React.FC<IEditMovimentacoes> = ({
+  editMoviemtacoes = false,
   fechar
 }) => {
 
@@ -34,10 +48,27 @@ const EditMovimentacoes: React.FC<IEditContas> = ({
       telaHeight="70%"
       telaWidth="80%"
       fechar={buttonFechar}>
-     
+
+      <DivComponent>
+
+        <FormComponent>
 
 
-      
+
+        </FormComponent>
+
+        <DivButtons>
+          <DivButton>
+            <Button style={{ background: "blue" }}>Salvar</Button>
+          </DivButton>
+          <DivButton>
+            <Button>Cancelar</Button>
+          </DivButton>
+        </DivButtons>
+
+      </DivComponent>
+
+
 
     </TelasFlutuantes>
   )
