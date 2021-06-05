@@ -58,6 +58,16 @@ const Movimentacoes: React.FC = () => {
         buscarObjetivos()
     }
 
+    function clickEditMovimentacoes(id: number){
+        setTelaVisivel("")
+        console.log(`Clicou Edity ${id} !`)
+    }
+
+    function clickDeleteMovimentacoes(id: number){
+        console.log(`Clicou Delete ${id} !`)
+        
+    }
+
     return (
 
         <LayoutPrincipal displayCarregamento={carregar} titulo="Movimentacões" >
@@ -78,8 +88,8 @@ const Movimentacoes: React.FC = () => {
 
                                 id={item.id}
                                 nomeMovimentacoes={item.nomeMovimentacoes}
-                                idDeleteAtendimentos={() => { }}
-                                idEditAtendimentos={() => { }}
+                                idDeleteAtendimentos={clickDeleteMovimentacoes}
+                                idEditAtendimentos={clickEditMovimentacoes}
                             ></CardsMovimentacoes>
                         </ItemLista>
 
