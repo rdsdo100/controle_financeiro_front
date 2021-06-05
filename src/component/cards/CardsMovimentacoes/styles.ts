@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import { MdDeleteForever, MdModeEdit } from "react-icons/md";
 
 export const DivButtons = styled.div`
+grid-area: DBU;
  display: none;
 position: relative;
-height: 100%;
-width: 25%;
 padding: 15px;
 `;
 
@@ -21,18 +20,14 @@ background-color: ${props => props.theme.colors.tertiary};
   margin: 10px 10px 5px 5px;
 
   display: grid;
-  grid-template-rows:  90% auto;
-    grid-template-columns: auto 1200px auto ;
+  grid-template-rows: 50px 50px 50px;
+  grid-template-columns: 20% 40% 30% 10% ;
 
-    background-color:${props => props.theme.colors.primary};
+    
     grid-template-areas:
-    "MH MH MH" 
-    "ATL PR ATR";
-    grid-gap: 5px;
-
-
-
-
+    "DI DN DDATA DBU" 
+    "DI DD DDATA DBU"
+    "DI DV DB DB";
 
   &:hover {
         background-color: ${props => props.theme.colors.primary};
@@ -54,44 +49,51 @@ width: 65%;
 
 `;
 
-export const ImageContaBanco = styled.img`
-position: absolute;
-width: 100px;
- height: 100px;
-margin: 25px 0 ; 
-padding-left: 5px;
+export const  DivImage = styled.div`
+grid-area: DI;
+border: 1px solid blue;
 
 `;
 
-export const Titulos = styled.h1`
-position: relative;
-color: ${props => props.theme.colors.gray};
-font-family: 'roboto' ;
-font-weight: 600;
-font-size: 18pt;
+export const  DivNome = styled.div`
+grid-area: DN;
+border: 1px solid blue;
+
 `;
 
-export const SubTitulos = styled.h2`
+export const  DivDescricao = styled.div`
+grid-area: DD;
+border: 1px solid blue;
 
-color: ${props => props.theme.colors.gray};
-font-family: 'roboto' ;
-font-weight: 600;
-font-size: 14pt;
 `;
 
-export const Nomes = styled.h3`
+export const  DivValor = styled.div`
+grid-area: DV;
+border: 1px solid blue;
 
-color: ${props => props.theme.colors.gray};
-font-family: 'roboto' ;
-font-weight: 600;
-font-size: 12pt;
 `;
 
-export const ButtonCardBancos = styled.button`
-    background-color: transparent;
-    padding:0;
-    margin: 0 5px;
+export const  DivData = styled.div`
+grid-area: DDATA;
+border: 1px solid blue;
+
 `;
+
+export const  DivBanco = styled.div`
+grid-area: DB;
+border: 1px solid blue;
+
+`;
+
+
+
+
+
+
+
+
+
+
 
 
 export const  MdDeleteForeverIcon = styled(MdDeleteForever)`

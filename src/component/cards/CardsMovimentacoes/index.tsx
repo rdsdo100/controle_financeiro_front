@@ -1,16 +1,8 @@
 import React from 'react';
-import { IContas } from '../../../pages/Conta';
 import { H1 } from '../../LayoutPrincipal/styles';
+import { ButtonCardBancos } from '../CardsBancos/styles';
 
-import {
-  ButtonCardBancos, Container,
-  DivBodyBanco, DivButtons,
-   MdDeleteForeverIcon, MdModeEditIcon,
-
-} from './styles';
-
-
-
+import { Container, DivBanco,  DivButtons, DivData, DivDescricao, DivImage, DivNome, DivValor, MdDeleteForeverIcon, MdModeEditIcon } from './styles';
 
 interface IMovimentacoesCard {
   dataEstorno?: boolean
@@ -51,17 +43,45 @@ const buttonEditdId = () => {
   return (
     <Container>
 
-    
-      <DivBodyBanco>     
+
+
+
+<DivImage></DivImage>
+
+
+<DivNome>
+          
 <H1>{`${id} - ${nomeMovimentacoes}  `}</H1>
-      </DivBodyBanco>
 
-      <DivButtons>
+</DivNome>
 
-        <ButtonCardBancos type="button" onClick={buttonEditdId}><MdModeEditIcon /></ButtonCardBancos>
+
+<DivDescricao></DivDescricao>
+
+
+<DivValor></DivValor>
+
+
+<DivData></DivData>
+
+
+<DivBanco></DivBanco>
+
+
+
+<DivButtons>
+
+<ButtonCardBancos type="button" onClick={buttonEditdId}><MdModeEditIcon /></ButtonCardBancos>
         <ButtonCardBancos type="button" onClick={buttonDeleteId} ><MdDeleteForeverIcon /></ButtonCardBancos>
+        </DivButtons>
+    
 
-      </DivButtons>
+
+
+    
+
+     
+
 
     </Container>
   )
@@ -69,3 +89,8 @@ const buttonEditdId = () => {
 };
 
 export default CardsMovimentacoes;
+
+
+
+
+
