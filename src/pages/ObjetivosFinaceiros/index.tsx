@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
-import CardsMovimentacoes from '../../component/cards/CardsMovimentacoes'
+import CardsObjetivosFinanceiro from '../../component/cards/CardsObjetivosFinanceiro'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
-import EditMovimentacoes from '../../component/telasEdits/EditMovimentacoes'
+import EditObjetivosFinanceiro from '../../component/telasEdits/EditObjetivosFinanceiro'
 import { api } from '../../services/api'
 import { DivEditMovimentacoes, Lista, ItemLista } from '../Movimentacoes/styles'
 
@@ -62,7 +62,7 @@ const ObjetivosFinaceiros: React.FC = () => {
         <LayoutPrincipal displayCarregamento={carregar} titulo="Objetivos Finaceiros" >
 
             <DivEditMovimentacoes style={{ display: telaVisivel }}>
-                <EditMovimentacoes
+                <EditObjetivosFinanceiro
                     fechar={() => { setTelaVisivel("none") }} />
 
             </DivEditMovimentacoes>
@@ -73,13 +73,13 @@ const ObjetivosFinaceiros: React.FC = () => {
                     {monimentacoes.map((item: IMovimentacoes) => {
 
                         return <ItemLista key={item.id}>
-                            <CardsMovimentacoes
+                            <CardsObjetivosFinanceiro
 
                                 id={item.id}
                                 nomeMovimentacoes={item.nomeMovimentacoes}
                                 idDeleteAtendimentos={() => { }}
                                 idEditAtendimentos={() => { }}
-                            ></CardsMovimentacoes>
+                            ></CardsObjetivosFinanceiro>
                         </ItemLista>
 
                     })}
@@ -88,7 +88,7 @@ const ObjetivosFinaceiros: React.FC = () => {
 
             </CardBuscaComponent>
 
-
+                
         </LayoutPrincipal>
 
 
