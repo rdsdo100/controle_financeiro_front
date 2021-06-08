@@ -14,23 +14,64 @@ justify-content: space-between;
 `;
 
 export const FormComponent = styled.div`
-
+border:  1px solid white;
  position: relative;
- display: grid;
-  grid-template-rows: 70px 70px 70px;
-  grid-template-columns: 20% 40% 30% 10% ;
-
-    
-    grid-template-areas:
-    "DI DN DDATA DBU" 
-    "DI DD DDATA DBU"
-    "DI DV DB DB";
-
+display:  flex ;
+flex-direction: column;
   
 
 `;
 
+export const DivId = styled.div`
+position: relative;
+width: 30px;
+grid-area: DI;
+border:  1px solid white;
+`;
+
+export const DivNome = styled.div`
+position: relative;
+grid-area: DN;
+border: 1px solid blue;
+
+`;
+
+export const DivEntrada = styled.div`
+position: relative;
+grid-area: DE;
+border: 1px solid blue;
+
+`;
+
+export const DivData = styled.div`
+position: relative;
+grid-area: DD;
+border: 1px solid blue;
+`;
+
+export const DivValor = styled.div`
+position: relative;
+grid-area: DV;
+border: 1px solid blue;
+
+`;
+
+export const DivDescricao = styled.div`
+position: relative;
+grid-area: DDESC;
+border: 1px solid blue;
+
+`;
+
+export const DivEstorno = styled.div`
+position: relative;
+grid-area: DEST;
+border: 1px solid blue;
+`;
+
+
 export const DivButtons = styled.div`
+
 
  position: relative;
  display: flex;

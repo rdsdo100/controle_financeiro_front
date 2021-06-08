@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import Button from '../../buttons/Button';
 import TelasFlutuantes from '../../TelasFlutuantes';
-import { DivButton, DivButtons, DivComponent, FormComponent } from './styles';
+import { DivButton, DivButtons, DivComponent, FormComponent, DivId, 
+  DivNome, DivData, DivDescricao, DivEntrada, DivEstorno, DivValor } from './styles';
 
 interface IMovimentacoes {
   dataEstorno?: boolean
@@ -53,7 +54,19 @@ const EditMovimentacoes: React.FC<IEditMovimentacoes> = ({
 
         <FormComponent>
 
+          <DivId ></DivId>
 
+          <DivNome ></DivNome>
+
+          <DivEntrada ></DivEntrada>
+
+          <DivData ></DivData>
+
+          <DivValor ></DivValor>
+
+          <DivDescricao ></DivDescricao>
+
+          <DivEstorno ></DivEstorno>
 
         </FormComponent>
 
@@ -75,3 +88,8 @@ const EditMovimentacoes: React.FC<IEditMovimentacoes> = ({
 };
 
 export default EditMovimentacoes;
+
+
+
+
+
