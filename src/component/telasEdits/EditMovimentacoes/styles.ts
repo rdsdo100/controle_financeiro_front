@@ -6,67 +6,67 @@ export const DivComponent = styled.div`
  position: relative;
  width: 100%;
  height: 450px;
-display: flex;
-flex-direction: column;
 
-justify-content: space-between;
     
 `;
 
 export const FormComponent = styled.div`
-border:  1px solid white;
- position: relative;
-display:  flex ;
-flex-direction: column;
+padding: 5px;
+
+width: 100%;
+
+ 
   
 
 `;
 
+export const DivLinha = styled.div`
+
+position: relative;
+display: flex;
+flex-direction: row;
+width: 100%;
+height: 80px;
+`;
+
 export const DivId = styled.div`
 position: relative;
-width: 30px;
-grid-area: DI;
-border:  1px solid white;
+width: 15%;
 `;
 
 export const DivNome = styled.div`
 position: relative;
-grid-area: DN;
-border: 1px solid blue;
+width: 70%;
 
 `;
 
 export const DivEntrada = styled.div`
 position: relative;
-grid-area: DE;
-border: 1px solid blue;
+
 
 `;
 
 export const DivData = styled.div`
 position: relative;
-grid-area: DD;
-border: 1px solid blue;
+
 `;
 
 export const DivValor = styled.div`
 position: relative;
-grid-area: DV;
-border: 1px solid blue;
+
 
 `;
 
 export const DivDescricao = styled.div`
 position: relative;
-grid-area: DDESC;
-border: 1px solid blue;
+padding: 10px;
+
 
 `;
 
 export const DivEstorno = styled.div`
 position: relative;
-grid-area: DEST;
-border: 1px solid blue;
+
 `;
 
 
