@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -104,8 +105,40 @@ export  const  A = styled.button`
     0 0 50px #03e9f4,
     0 0 100px #03e9f4;
   }
-
 `;
+
+
+export  const LinkNovoCadastro  = styled(Link)`
+
+    position: relative;
+ 
+    
+    color: ${props => props.theme.colors.success};
+    font-size: 16px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 2px;
+    background-color: transparent;
+  
+
+  :hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 25px #03e9f4,
+    0 0 50px #03e9f4,
+    0 0 100px #03e9f4;
+  }
+`
+;
+
+
+
 export const Div = styled.div`
 
 `;

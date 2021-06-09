@@ -7,6 +7,7 @@ import Conta from "../pages/Conta";
 import Usuario from "../pages/Usuario";
 import ObjetivosFinaceiros from "../pages/ObjetivosFinaceiros";
 import Movimentacoes from "../pages/Movimentacoes";
+import UsuarioCadastro from "../pages/UsuarioCadastro";
 
 
 const PrivateRoute = ({ component, isAuthenticated, ...rest }: any) => {
@@ -30,6 +31,7 @@ const Routes = () => {
       <Switch> // não deixa mais de uma rota ser chamada ao mesmo tempo
 
         <Route component={Login} path='/' exact ></Route>
+        <Route component = {UsuarioCadastro} path={'/usuario-cadastro'} ></Route>
         <PrivateRoute component={Home} path='/home' ></PrivateRoute>
         <PrivateRoute component={Conta} path='/conta' ></PrivateRoute>
         <PrivateRoute component={Usuario} path='/usuario' ></PrivateRoute>

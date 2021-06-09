@@ -1,8 +1,9 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react'
-import {useHistory} from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 import Carregamento from '../../component/Carregamento';
 import LoginServer from "../../services/LoginServer";
-import { Component,LoginBox, H2, UserBox , Input , Label , A, Form, Div} from './styles'
+import { Component,LoginBox, H2, UserBox , Input ,
+     Label , A, Form, Div, LinkNovoCadastro} from './styles'
 
 const Login: React.FC = () => {
 
@@ -75,6 +76,7 @@ return(
                 <span>{error}</span>
                 <A type='submit'
                 >Entrar</A>
+<LinkNovoCadastro to="/usuario-cadastro">Novo cadastro</LinkNovoCadastro>
             </Form>
         </LoginBox>
     </Component>
