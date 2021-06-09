@@ -108,6 +108,21 @@ const Conta: React.FC = () => {
 
     }, [])
 
+
+
+    function limparCampos() {
+
+        if ((document.getElementById("textAreaAtendimento")) &&
+            (document.getElementById("empresasSelectAtendimentos")) &&
+            (document.getElementById("IdAtendimento"))) {
+            (document.getElementById("textAreaAtendimento") as HTMLInputElement).value = "";
+            (document.getElementById("empresasSelectAtendimentos") as HTMLInputElement).value = "0";
+            (document.getElementById("IdAtendimento") as HTMLInputElement).value = "0";
+        }
+    }
+
+
+
     function handleSelectChangeBancos(event: ChangeEvent<HTMLSelectElement>) {
         const { value } = event.target
 

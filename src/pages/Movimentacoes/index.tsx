@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
 import CardsMovimentacoes from '../../component/cards/CardsMovimentacoes'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
+import MessageBoxComponent from '../../component/MessageBoxComponent'
 import EditMovimentacoes from '../../component/telasEdits/EditMovimentacoes'
 import { api } from '../../services/api'
 import { DivEditMovimentacoes, ItemLista, Lista } from './styles'
@@ -30,6 +31,10 @@ const Movimentacoes: React.FC = () => {
     const [monimentacoes, setMonimentacoes] = useState<IMovimentacoes[]>([])
 
 
+
+
+
+    
     function buscarObjetivos() {
         setCarregar("")
 
@@ -68,13 +73,39 @@ const Movimentacoes: React.FC = () => {
         
     }
 
+    function carregarMessage(message: string) {
+        setCarregar("none")
+        setTelaVisivelMessage("")
+        setMessage(message)
+    }
+    function fecharMessage(fechar: string) {
+        setTelaVisivelMessage(fechar)
+    }
+
     return (
 
         <LayoutPrincipal displayCarregamento={carregar} titulo="Movimentacões" >
 
+
+< div style={{ display: telaVisivelMessage }} >
+                <MessageBoxComponent
+                    telaWidth={"40%"}
+                    telaHeight={"40%"}
+                    fechar={fecharMessage}
+                >
+                    {message}
+
+                </MessageBoxComponent>
+            </div>
+
+
             <DivEditMovimentacoes style={{ display: telaVisivel }}>
                 <EditMovimentacoes
-                    fechar={() => { setTelaVisivel("none") }} />
+                    fechar={() => { setTelaVisivel("none") }} 
+                    carregamento = {(carregar: string)=>{setCarregar(carregar)}}
+                    telaMessagem = {carregarMessage}
+                    
+                    />
 
             </DivEditMovimentacoes>
 

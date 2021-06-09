@@ -2,15 +2,10 @@ import React, { InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 
 import { Container }  from './styles'
 
-interface ITextArea {
-    placeholDerDescricao?: string
-    altura: string
-}
+type ITextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> 
 
-
-
-const TextArea: React.FC<ITextArea> = ({  altura , placeholDerDescricao}) => (
-    <Container placeholder={placeholDerDescricao} style= {{height: altura}} />
+const TextArea: React.FC<ITextAreaProps> = ({ ...rest }) => (
+    <Container {...rest} />
 );
 
 export default TextArea;
