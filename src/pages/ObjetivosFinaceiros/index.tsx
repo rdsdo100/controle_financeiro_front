@@ -3,6 +3,7 @@ import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
 import CardsObjetivosFinanceiro from '../../component/cards/CardsObjetivosFinanceiro'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
 import EditObjetivosFinanceiro from '../../component/telasEdits/EditObjetivosFinanceiro'
+
 import { api } from '../../services/api'
 import { DivEditMovimentacoes, Lista, ItemLista } from '../Movimentacoes/styles'
 
@@ -57,13 +58,22 @@ const ObjetivosFinaceiros: React.FC = () => {
         buscarObjetivos()
     }
 
+
+    function carregarMessage(message: string) {
+        setCarregar("none")
+        setTelaVisivelMessage("")
+        setMessage(message)
+    }
+
     return (
 
         <LayoutPrincipal displayCarregamento={carregar} titulo="Objetivos Finaceiros" >
 
             <DivEditMovimentacoes style={{ display: telaVisivel }}>
                 <EditObjetivosFinanceiro
-                    fechar={() => { setTelaVisivel("none") }} />
+                     fechar={() => { setTelaVisivel("none") }} 
+                     carregamento = {(carregar: string)=>{setCarregar(carregar)}}
+                     telaMessagem = {carregarMessage} />
 
             </DivEditMovimentacoes>
 

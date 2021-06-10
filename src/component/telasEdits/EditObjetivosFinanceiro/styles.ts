@@ -6,31 +6,72 @@ export const DivComponent = styled.div`
  position: relative;
  width: 100%;
  height: 450px;
-display: flex;
-flex-direction: column;
 
-justify-content: space-between;
     
 `;
 
 export const FormComponent = styled.div`
+padding: 5px;
 
- position: relative;
- display: grid;
-  grid-template-rows: 70px 70px 70px;
-  grid-template-columns: 20% 40% 30% 10% ;
+width: 100%;
 
-    
-    grid-template-areas:
-    "DI DN DDATA DBU" 
-    "DI DD DDATA DBU"
-    "DI DV DB DB";
-
+ 
   
 
 `;
 
+export const DivLinha = styled.div`
+
+position: relative;
+display: flex;
+flex-direction: row;
+width: 100%;
+height: 80px;
+`;
+
+export const DivId = styled.div`
+position: relative;
+width: 15%;
+`;
+
+export const DivNome = styled.div`
+position: relative;
+width: 70%;
+
+`;
+
+export const DivEntrada = styled.div`
+position: relative;
+
+
+`;
+
+export const DivData = styled.div`
+position: relative;
+
+`;
+
+export const DivValor = styled.div`
+position: relative;
+
+
+`;
+
+export const DivDescricao = styled.div`
+position: relative;
+padding: 10px;
+
+
+`;
+
+export const DivEstorno = styled.div`
+position: relative;
+
+`;
+
+
 export const DivButtons = styled.div`
+
 
  position: relative;
  display: flex;
