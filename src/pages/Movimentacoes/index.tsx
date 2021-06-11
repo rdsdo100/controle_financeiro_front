@@ -14,7 +14,8 @@ interface IMovimentacoes {
     estorno?: true
     id: number
     nomeMovimentacoes?: string
-    tipoEntrada?: true
+    tipoEntrada?: boolean
+    tipoPoupanca? : boolean
     valorContaAnterior?: number
     valorMovimento?: number
 }
@@ -38,7 +39,7 @@ const Movimentacoes: React.FC = () => {
     function buscarObjetivos() {
         setCarregar("")
 
-        api.get('movimentacoes/busca-user',
+        api.get('movimentacoes',
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data

@@ -16,18 +16,20 @@ interface IMovimentacoesEdit {
   estorno?: true
   id?: number
   nomeMovimentacoes?: string
-  tipoEntrada?: true
+  tipoEntrada?: boolean
+  tipoPoupanca? : boolean
   valorContaAnterior?: number
   valorMovimento?: number
   contasId?: number
 }
 
 interface IMovimentacoesRegister {
-  nomeMovimentacoes: string
-  valorMovimento: number
-  descricao: string
-  tipoEntrada: Boolean
-  contasId: number
+  nomeMovimentacoes : string
+	valorMovimento: number
+	descricao: string
+	tipoEntrada : boolean
+	tipoPoupanca : boolean
+	contaId: number
 }
 
 interface IEditMovimentacoes {
@@ -67,7 +69,8 @@ const EditMovimentacoes: React.FC<IEditMovimentacoes> = ({
   const [valorMovimento, setValorMovimento] = useState<number>(0)
   const [descricao, setDescricao] = useState<string>('')
   const [tipoEntrada, setTipoEntrada] = useState<boolean>(true)
-  const [contasId, setContasId] = useState<number>(0)
+  const [tipoPoupanca, setTipoPoupanca] = useState<boolean>(false)
+  const [contaId, setContaId] = useState<number>(0)
   const auth = localStorage.getItem('Authorization')
 
   function habdleInputChangeNomeMovimentacoes(event: ChangeEvent<HTMLInputElement>) {
@@ -95,9 +98,14 @@ const EditMovimentacoes: React.FC<IEditMovimentacoes> = ({
     setTipoEntrada(Boolean(value))
   }
 
+  function habdleInputChangeTipoPoupanca(event: ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target
+    setTipoPoupanca(Boolean(value))
+  }
+
   function habdleInputChangeContasId(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    setContasId(Number(value))
+    setContaId(Number(value))
   }
 
 function salvarMovimentacoes(){
@@ -107,7 +115,8 @@ function salvarMovimentacoes(){
   valorMovimento,
   descricao,
   tipoEntrada,
-  contasId
+  tipoPoupanca,
+  contaId
   }
 
   if(registerMovimentacoes){
