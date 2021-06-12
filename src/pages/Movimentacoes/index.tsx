@@ -29,7 +29,8 @@ const Movimentacoes: React.FC = () => {
     const auth = localStorage.getItem('Authorization')
     const [movimentacoesAtualizar, setMovimentacoesAtualizar] = useState<number>(0)
     const [carregar, setCarregar] = useState<string>("none")
-    const [monimentacoes, setMonimentacoes] = useState<IMovimentacoes[]>([])
+    const [listMovimentacoes, setListMovimentacoes] = useState<IMovimentacoes[]>([])
+    const [movimentacoes, setMovimentacoes] = useState<IMovimentacoes>()
 
 
 
@@ -39,26 +40,23 @@ const Movimentacoes: React.FC = () => {
     function buscarObjetivos() {
         setCarregar("")
 
-        api.get('movimentacoes',
+        api.get('movimentacoes/busca-user',
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
-                setMonimentacoes(resposta)
+                setListMovimentacoes(resposta)
 
                 setCarregar("none")
             })
             .catch(erro => {
-                alert('Erro ao acessar servidor!')
-
+                setCarregar("none")
+                carregarMessage('Erro ao acessar servidor!') 
             })
     }
-
-
 
     useEffect(() => {
         buscarObjetivos()
     }, [])
-
 
     async function buscarmovimentacoes() {
         buscarObjetivos()
@@ -66,7 +64,11 @@ const Movimentacoes: React.FC = () => {
 
     function clickEditMovimentacoes(id: number){
         setTelaVisivel("")
-        console.log(`Clicou Edity ${id} !`)
+
+        let movimentacoesEdit: any = listMovimentacoes.find((item: IMovimentacoes) => item.id == id)
+       setMovimentacoes(movimentacoesEdit)
+
+        
     }
 
     function clickDeleteMovimentacoes(id: number){
@@ -83,6 +85,7 @@ const Movimentacoes: React.FC = () => {
         setTelaVisivelMessage(fechar)
     }
 
+   
     return (
 
         <LayoutPrincipal displayCarregamento={carregar} titulo="Movimentacões" >
@@ -105,6 +108,7 @@ const Movimentacoes: React.FC = () => {
                     fechar={() => { setTelaVisivel("none") }} 
                     carregamento = {(carregar: string)=>{setCarregar(carregar)}}
                     telaMessagem = {carregarMessage}
+                    movimentacoes = {movimentacoes}
                     
                     />
 
@@ -113,7 +117,7 @@ const Movimentacoes: React.FC = () => {
             <CardBuscaComponent clickBusca={buscarmovimentacoes} clickNovo={() => { setTelaVisivel("") }} >
 
                 <Lista>
-                    {monimentacoes.map((item: IMovimentacoes) => {
+                    {listMovimentacoes.map((item: IMovimentacoes) => {
 
                         return <ItemLista key={item.id}>
                             <CardsMovimentacoes

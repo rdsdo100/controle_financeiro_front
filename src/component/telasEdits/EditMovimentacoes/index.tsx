@@ -17,19 +17,19 @@ interface IMovimentacoesEdit {
   id?: number
   nomeMovimentacoes?: string
   tipoEntrada?: boolean
-  tipoPoupanca? : boolean
+  tipoPoupanca?: boolean
   valorContaAnterior?: number
   valorMovimento?: number
   contasId?: number
 }
 
 interface IMovimentacoesRegister {
-  nomeMovimentacoes : string
-	valorMovimento: number
-	descricao: string
-	tipoEntrada : boolean
-	tipoPoupanca : boolean
-	contaId: number
+  nomeMovimentacoes: string
+  valorMovimento: number
+  descricao: string
+  tipoEntrada: boolean
+  tipoPoupanca: boolean
+  contaId: number
 }
 
 interface IEditMovimentacoes {
@@ -38,12 +38,12 @@ interface IEditMovimentacoes {
 
   readonly fechar: (arg0: string) => void;
   readonly carregamento: (arg0: string) => void;
-  readonly telaMessagem: ( message: string) => void;
+  readonly telaMessagem: (message: string) => void;
 
 
 }
 
-interface IBootonEdit{
+interface IBootonEdit {
   color: string
   text: string
 }
@@ -51,20 +51,20 @@ interface IBootonEdit{
 
 interface ILayoutEdit {
 
-buttonEdit: IBootonEdit
-dasabilitarCampo: boolean
+  buttonEdit: IBootonEdit
+  dasabilitarCampo: boolean
 
 
 }
 
 const EditMovimentacoes: React.FC<IEditMovimentacoes> = ({
-  editMoviemtacoes = false,movimentacoes ,carregamento, telaMessagem,
+  editMoviemtacoes = false, movimentacoes, carregamento, telaMessagem,
   fechar
 }) => {
 
 
-  
-  const [movimentacoesEdit, setMovimentacoesEdit]= useState<IMovimentacoesEdit>()
+
+  const [movimentacoesEdit, setMovimentacoesEdit] = useState<IMovimentacoesEdit>()
   const [nomeMovimentacoes, setNomeMovimentacoes] = useState<string>('')
   const [valorMovimento, setValorMovimento] = useState<number>(0)
   const [descricao, setDescricao] = useState<string>('')
@@ -108,28 +108,28 @@ const EditMovimentacoes: React.FC<IEditMovimentacoes> = ({
     setContaId(Number(value))
   }
 
-function salvarMovimentacoes(){
+  function salvarMovimentacoes() {
 
-  const registerMovimentacoes: IMovimentacoesRegister ={
-   nomeMovimentacoes,
-  valorMovimento,
-  descricao,
-  tipoEntrada,
-  tipoPoupanca,
-  contaId
+    const registerMovimentacoes: IMovimentacoesRegister = {
+      nomeMovimentacoes,
+      valorMovimento,
+      descricao,
+      tipoEntrada,
+      tipoPoupanca,
+      contaId
+    }
+
+    if (registerMovimentacoes) {
+
+    } else {
+
+    }
+
+
+
+
+
   }
-
-  if(registerMovimentacoes){
-
-  }else{
-
-  }
-
-
-
-
-
-}
 
   const buttonFechar = () => {
 
@@ -137,14 +137,14 @@ function salvarMovimentacoes(){
   }
   const sendMessage = (message: string) => {
 
-    telaMessagem( message);
+    telaMessagem(message);
   }
 
   const sendCarregar = () => {
 
     carregamento("");
   }
-  
+
 
 
 
@@ -167,11 +167,21 @@ function salvarMovimentacoes(){
 
           <DivLinha>
             <DivEntrada >
-              <strong>Entrada?</strong><Toggle></Toggle>
+              <strong>Entrada?</strong>
+              <Toggle
+                defaultChecked={movimentacoes?.tipoEntrada}
+              ></Toggle>
+            </DivEntrada>
+            <DivEntrada >
+              <strong>Poupança?</strong>
+              <Toggle
+                defaultChecked={movimentacoes?.tipoPoupanca}
+              ></Toggle>
             </DivEntrada>
             <DivEstorno >
               <button>Estorno</button>
             </DivEstorno>
+
 
 
           </DivLinha>
@@ -179,16 +189,17 @@ function salvarMovimentacoes(){
             <DivId >
 
               <InputCadastro
-              id="id"
-            
+                id="id"
+                defaultValue={movimentacoes?.id}
               >Id</InputCadastro>
 
             </DivId>
 
             <DivNome >
               <InputCadastro
-              id="nomeMovimentacoes"
-              onChange={habdleInputChangeNomeMovimentacoes}
+                id="nomeMovimentacoes"
+                defaultValue={movimentacoes?.nomeMovimentacoes}
+                onChange={habdleInputChangeNomeMovimentacoes}
               >Nome</InputCadastro>
             </DivNome>
           </DivLinha>
@@ -196,24 +207,27 @@ function salvarMovimentacoes(){
 
             <DivValor >
               <InputCadastro
-              id="nalorMovimento"
-              onChange={habdleInputChangeValorMovimento}
+                id="valorMovimento"
+                defaultValue={movimentacoes?.valorMovimento}
+                onChange={habdleInputChangeValorMovimento}
               >Valor</InputCadastro>
             </DivValor>
-            
+
             <DivData >
               <InputCadastro
-              id=""
-            
+                id="dataMovimento"
+                defaultValue={String(movimentacoes?.dataMovimento)}
+
               >Data</InputCadastro>
             </DivData>
 
 
           </DivLinha>
           <DivDescricao >
-            <TextArea style={{height:"200px"}} placeholder={"Descrição"} 
-            id="descricao"
-            onChange={habdleInputChangeDescricao}
+            <TextArea style={{ height: "200px" }} placeholder={"Descrição"}
+              id="descricao"
+              defaultValue={movimentacoes?.descricao}
+              onChange={habdleInputChangeDescricao}
             ></TextArea>
           </DivDescricao>
 
@@ -223,7 +237,7 @@ function salvarMovimentacoes(){
 
         <DivButtons>
           <DivButton>
-            <Button onClick={()=>{sendMessage("Salvou")}} style={{ background: "blue" }}>Salvar</Button>
+            <Button onClick={() => { sendMessage("Salvou") }} style={{ background: "blue" }}>Salvar</Button>
           </DivButton>
           <DivButton>
             <Button onClick={buttonFechar}>Cancelar</Button>
