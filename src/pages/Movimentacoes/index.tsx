@@ -31,12 +31,7 @@ const Movimentacoes: React.FC = () => {
     const [carregar, setCarregar] = useState<string>("none")
     const [listMovimentacoes, setListMovimentacoes] = useState<IMovimentacoes[]>([])
     const [movimentacoes, setMovimentacoes] = useState<IMovimentacoes>()
-
-
-
-
-
-    
+   
     function buscarObjetivos() {
         setCarregar("")
 
@@ -56,7 +51,7 @@ const Movimentacoes: React.FC = () => {
 
     useEffect(() => {
         buscarObjetivos()
-    }, [])
+    }, [movimentacoesAtualizar])
 
     async function buscarmovimentacoes() {
         buscarObjetivos()
@@ -68,12 +63,24 @@ const Movimentacoes: React.FC = () => {
         let movimentacoesEdit: any = listMovimentacoes.find((item: IMovimentacoes) => item.id == id)
        setMovimentacoes(movimentacoesEdit)
 
-        
     }
 
     function clickDeleteMovimentacoes(id: number){
-        console.log(`Clicou Delete ${id} !`)
-        
+     
+        api.delete<string>(`movimentacoes/${id}`,
+        { headers: { authorization: auth } })
+        .then(response => {
+            const resposta: any = response.data
+
+            setMovimentacoesAtualizar(movimentacoesAtualizar + 1)
+            setCarregar("")
+            carregarMessage(String(`${response.status} - ${resposta}`))
+
+        }).catch(erro => {
+          
+            carregarMessage('Não enviado!')
+
+        })
     }
 
     function carregarMessage(message: string) {
