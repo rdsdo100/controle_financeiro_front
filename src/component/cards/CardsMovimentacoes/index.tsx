@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { H1 } from '../../LayoutPrincipal/styles';
 import { ButtonCardBancos } from '../CardsBancos/styles';
 
@@ -88,7 +88,7 @@ const buttonEditdId = () => {
 
 };
 
-export default CardsMovimentacoes;
+export default memo(CardsMovimentacoes);
 
 
 

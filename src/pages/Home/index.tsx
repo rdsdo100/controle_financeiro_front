@@ -1,10 +1,15 @@
 import React from 'react'
 import LayoutHome from '../../component/LayoutHome';
 
+
 const Home: React.FC = () => {
 
+
+
+ 
     return (
         <LayoutHome titulo="Home" >
+
 
         </LayoutHome>
 

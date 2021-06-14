@@ -8,20 +8,11 @@ interface IAuthContext {
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
-const AuthProvider: React.FC = ({ children }) => {
-    const [logged, setLogged] = useState<boolean>(() => {
-        const isLogged = localStorage.getItem('@minha-carteira:logged');
-
-        return !!isLogged;
-    });
+const TestProvider: React.FC = ({ children }) => {
+    const [logged, setLogged] = useState<boolean>(true);
 
     const signIn = (email: string, password: string) => {
-        if(email === 'rodrigo@email.com' && password === '123'){
-            localStorage.setItem('@minha-carteira:logged', 'true');
-            setLogged(true);
-        }else{
-            alert('Senha ou usuário inválidos!');
-        }
+        
     }
 
     const signOut = () => {
@@ -42,4 +33,4 @@ function useAuth(): IAuthContext {
     return context;
 }
 
-export { AuthProvider, useAuth };
+export { TestProvider, useAuth };
