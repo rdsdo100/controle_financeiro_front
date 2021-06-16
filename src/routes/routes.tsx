@@ -8,6 +8,7 @@ import Usuario from "../pages/Usuario";
 import ObjetivosFinaceiros from "../pages/ObjetivosFinaceiros";
 import Movimentacoes from "../pages/Movimentacoes";
 import UsuarioCadastro from "../pages/UsuarioCadastro";
+import ExBar from "../pages/ExBar";
 
 
 const PrivateRoute = ({ component, isAuthenticated, ...rest }: any) => {
@@ -32,6 +33,7 @@ const Routes = () => {
 
         <Route component={Login} path='/' exact ></Route>
         <Route component = {UsuarioCadastro} path={'/usuario-cadastro'} ></Route>
+        <Route component = {ExBar} path={'/ex'} ></Route>
         <PrivateRoute component={Home} path='/home' ></PrivateRoute>
         <PrivateRoute component={Conta} path='/conta' ></PrivateRoute>
         <PrivateRoute component={Usuario} path='/usuario' ></PrivateRoute>
