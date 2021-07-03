@@ -86,7 +86,7 @@ const EditContas: React.FC<IEditContas> = ({
 
       editConta.id = Number(id)
 
-      api.put<IContas>('conta', editConta,
+      api.put<IContas>('contas', editConta,
         { headers: { authorization: auth } })
         .then(response => {
           const resposta: any = response.data

@@ -78,7 +78,7 @@ const Conta: React.FC = () => {
 
     useEffect(() => {
 
-        api.get('conta',
+        api.get('contas',
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
@@ -95,7 +95,7 @@ const Conta: React.FC = () => {
 
     useEffect(() => {
 
-        api.get('banco',
+        api.get('bancos',
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
@@ -167,7 +167,7 @@ const Conta: React.FC = () => {
         }
 
         setCarregar("")
-        api.post<IContas>('conta', conta,
+        api.post<IContas>('contas', conta,
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
@@ -209,7 +209,7 @@ const Conta: React.FC = () => {
 
     function handleDeleteBancos(idDelete: number) {
 
-        api.delete<IContas>(`conta/${idDelete}`,
+        api.delete<IContas>(`contas/${idDelete}`,
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
