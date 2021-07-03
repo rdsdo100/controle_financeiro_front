@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
-import CardsMovimentacoes from '../../component/cards/CardsMovimentacoes'
+import CardsMovimentacoes from './CardsMovimentacoes'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
 import MessageBoxComponent from '../../component/MessageBoxComponent'
-import EditMovimentacoes from '../../component/telasEdits/EditMovimentacoes'
+import EditMovimentacoes from './EditMovimentacoes'
 import { api } from '../../services/api'
 import { DivEditMovimentacoes, ItemLista, Lista } from './styles'
 

@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-import { IContas } from '../../../pages/Conta';
+import { IContas } from '..';
 
 import {
   ButtonCardBancos, Container,

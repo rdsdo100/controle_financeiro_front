@@ -1,6 +1,6 @@
 import React from 'react';
-import { H1 } from '../../LayoutPrincipal/styles';
-import { ButtonCardBancos } from '../CardsBancos/styles';
+import { H1 } from '../../../component/LayoutPrincipal/styles';
+import { ButtonCardBancos } from '../../Conta/CardsBancos/styles';
 
 import { Container, DivBanco,  DivButtons, DivData, DivDescricao, DivImage, DivNome, DivValor, MdDeleteForeverIcon, MdModeEditIcon } from './styles';
 

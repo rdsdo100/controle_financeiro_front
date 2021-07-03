@@ -1,48 +1,40 @@
 import React, { ChangeEvent, useState } from 'react';
-import Button from '../../buttons/Button';
-import InputCadastro from '../../inputs/InputCadastro';
-import TextArea from '../../inputs/TextArea';
-import Toggle from '../../inputs/Toggle';
-import TelasFlutuantes from '../../TelasFlutuantes';
+import Button from '../../../component/buttons/Button';
+import InputCadastro from '../../../component/inputs/InputCadastro';
+import TextArea from '../../../component/inputs/TextArea';
+import Toggle from '../../../component/inputs/Toggle';
+import TelasFlutuantes from '../../../component/TelasFlutuantes';
 import {
   DivButton, DivButtons, DivComponent, FormComponent, DivId,
   DivNome, DivData, DivDescricao, DivEntrada, DivEstorno, DivValor, DivLinha
 } from './styles';
 
-interface IObjetivosEdit {
+interface IMovimentacoesEdit {
   dataEstorno?: boolean
   dataMovimento?: Date
   descricao?: string
   estorno?: true
   id?: number
   nomeMovimentacoes?: string
-  tipoEntrada?: true
+  tipoEntrada?: boolean
+  tipoPoupanca?: boolean
   valorContaAnterior?: number
   valorMovimento?: number
   contasId?: number
 }
 
-
-
-
-
-interface IObjetivosFinaceiros {
-
-
-  nomeObjetivos: string
-  valorObjetivos: number
-  valorGuardado: number
+interface IMovimentacoesRegister {
+  nomeMovimentacoes: string
+  valorMovimento: number
   descricao: string
-  dataPrevistaObjetivos: Date
+  tipoEntrada: boolean
+  tipoPoupanca: boolean
   contaId: number
-
-
-
 }
 
 interface IEditMovimentacoes {
-  editObjetivos?: boolean
-  objetivos?: IObjetivosEdit
+  editMoviemtacoes?: boolean
+  movimentacoes?: IMovimentacoesEdit
 
   readonly fechar: (arg0: string) => void;
   readonly carregamento: (arg0: string) => void;
@@ -65,33 +57,35 @@ interface ILayoutEdit {
 
 }
 
-const EditObjetivosFinanceiro: React.FC<IEditMovimentacoes> = ({
-  editObjetivos = false, objetivos, carregamento, telaMessagem,
+const EditMovimentacoes: React.FC<IEditMovimentacoes> = ({
+  editMoviemtacoes = false, movimentacoes, carregamento, telaMessagem,
   fechar
 }) => {
 
 
-  const [nomeObjetivos, setNomeObjetivos] = useState<string>('')
-  const [valorObjetivos, setValorObjetivos] = useState<number>(0)
-  const [valorGuardado, setValorGuardado] = useState<number>(0)
+
+  const [movimentacoesEdit, setMovimentacoesEdit] = useState<IMovimentacoesEdit>()
+  const [nomeMovimentacoes, setNomeMovimentacoes] = useState<string>('')
+  const [valorMovimento, setValorMovimento] = useState<number>(0)
   const [descricao, setDescricao] = useState<string>('')
-  const [dataPrevistaObjetivos, setDataPrevistaObjetivos] = useState<Date>(new Date)
+  const [tipoEntrada, setTipoEntrada] = useState<boolean>(true)
+  const [tipoPoupanca, setTipoPoupanca] = useState<boolean>(false)
   const [contaId, setContaId] = useState<number>(0)
   const auth = localStorage.getItem('Authorization')
 
   function habdleInputChangeNomeMovimentacoes(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    //setNomeMovimentacoes(String(value))
+    setNomeMovimentacoes(String(value))
   }
 
   function habdleInputChangeNomeConta(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    //setNomeMovimentacoes(String(value))
+    setNomeMovimentacoes(String(value))
   }
 
   function habdleInputChangeValorMovimento(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    //setValorMovimento(Number(value))
+    setValorMovimento(Number(value))
   }
 
   function habdleInputChangeDescricao(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -101,27 +95,28 @@ const EditObjetivosFinanceiro: React.FC<IEditMovimentacoes> = ({
 
   function habdleInputChangeTipoEntrada(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-   // setTipoEntrada(Boolean(value))
+    setTipoEntrada(Boolean(value))
+  }
+
+  function habdleInputChangeTipoPoupanca(event: ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target
+    setTipoPoupanca(Boolean(value))
   }
 
   function habdleInputChangeContasId(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    //setContasId(Number(value))
+    setContaId(Number(value))
   }
 
   function salvarMovimentacoes() {
 
-    const registerMovimentacoes: IObjetivosFinaceiros = {
-
-      nomeObjetivos,
-      valorObjetivos,
-      valorGuardado,
+    const registerMovimentacoes: IMovimentacoesRegister = {
+      nomeMovimentacoes,
+      valorMovimento,
       descricao,
-      dataPrevistaObjetivos,
+      tipoEntrada,
+      tipoPoupanca,
       contaId
-
-
-
     }
 
     if (registerMovimentacoes) {
@@ -172,11 +167,21 @@ const EditObjetivosFinanceiro: React.FC<IEditMovimentacoes> = ({
 
           <DivLinha>
             <DivEntrada >
-              <strong>Entrada?</strong><Toggle></Toggle>
+              <strong>Entrada?</strong>
+              <Toggle
+                defaultChecked={movimentacoes?.tipoEntrada}
+              ></Toggle>
+            </DivEntrada>
+            <DivEntrada >
+              <strong>Poupança?</strong>
+              <Toggle
+                defaultChecked={movimentacoes?.tipoPoupanca}
+              ></Toggle>
             </DivEntrada>
             <DivEstorno >
               <button>Estorno</button>
             </DivEstorno>
+
 
 
           </DivLinha>
@@ -185,7 +190,7 @@ const EditObjetivosFinanceiro: React.FC<IEditMovimentacoes> = ({
 
               <InputCadastro
                 id="id"
-
+                defaultValue={movimentacoes?.id}
               >Id</InputCadastro>
 
             </DivId>
@@ -193,6 +198,7 @@ const EditObjetivosFinanceiro: React.FC<IEditMovimentacoes> = ({
             <DivNome >
               <InputCadastro
                 id="nomeMovimentacoes"
+                defaultValue={movimentacoes?.nomeMovimentacoes}
                 onChange={habdleInputChangeNomeMovimentacoes}
               >Nome</InputCadastro>
             </DivNome>
@@ -201,14 +207,16 @@ const EditObjetivosFinanceiro: React.FC<IEditMovimentacoes> = ({
 
             <DivValor >
               <InputCadastro
-                id="nalorMovimento"
+                id="valorMovimento"
+                defaultValue={movimentacoes?.valorMovimento}
                 onChange={habdleInputChangeValorMovimento}
               >Valor</InputCadastro>
             </DivValor>
 
             <DivData >
               <InputCadastro
-                id=""
+                id="dataMovimento"
+                defaultValue={String(movimentacoes?.dataMovimento)}
 
               >Data</InputCadastro>
             </DivData>
@@ -218,6 +226,7 @@ const EditObjetivosFinanceiro: React.FC<IEditMovimentacoes> = ({
           <DivDescricao >
             <TextArea style={{ height: "200px" }} placeholder={"Descrição"}
               id="descricao"
+              defaultValue={movimentacoes?.descricao}
               onChange={habdleInputChangeDescricao}
             ></TextArea>
           </DivDescricao>
@@ -243,7 +252,7 @@ const EditObjetivosFinanceiro: React.FC<IEditMovimentacoes> = ({
   )
 };
 
-export default EditObjetivosFinanceiro;
+export default EditMovimentacoes;
 
 
 

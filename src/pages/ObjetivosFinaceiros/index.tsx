@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import CardBuscaComponent from '../../component/cards/CardBuscaComponent'
-import CardsObjetivosFinanceiro from '../../component/cards/CardsObjetivosFinanceiro'
+import CardsObjetivosFinanceiro from './CardsObjetivosFinanceiro'
 import LayoutPrincipal from '../../component/LayoutPrincipal'
-import EditObjetivosFinanceiro from '../../component/telasEdits/EditObjetivosFinanceiro'
+import EditObjetivosFinanceiro from './EditObjetivosFinanceiro'
 
 import { api } from '../../services/api'
 import { DivEditMovimentacoes, Lista, ItemLista } from '../Movimentacoes/styles'

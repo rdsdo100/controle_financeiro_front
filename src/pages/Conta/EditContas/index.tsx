@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
-import { IContas } from '../../../pages/Conta';
+import { IContas } from '..';
 import { api } from '../../../services/api';
-import Button from '../../buttons/Button';
-import InputCadastro from '../../inputs/InputCadastro';
-import Toggle from '../../inputs/Toggle';
-import TelasFlutuantes from '../../TelasFlutuantes';
+import Button from '../../../component/buttons/Button';
+import InputCadastro from '../../../component/inputs/InputCadastro';
+import Toggle from '../../../component/inputs/Toggle';
+import TelasFlutuantes from '../../../component/TelasFlutuantes';
 import { Div30Conta, Div70Conta, DivLinhaConta } from './styles';
 
 interface IEditContas {
