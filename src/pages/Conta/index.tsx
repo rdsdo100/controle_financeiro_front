@@ -10,6 +10,7 @@ import CardRegisterTab from '../../component/TabsComponents/CardRegisterTab'
 import EditContas from './EditContas'
 import { api } from '../../services/api'
 import { DivBancos, DivSelect, DivImage, ImageBanco } from './styles'
+import { useRef } from 'react'
 
 export interface IContas {
     id?: number
@@ -19,10 +20,9 @@ export interface IContas {
     ativo?: boolean
     bloqueado?: boolean
     nomeConta: string
-    usuariosIdFK?: {
-        id: number
+    idBbancos?:  number
 
-    }
+    
     bancosIdFK?: {
         id: number
         nomeBanco?: string
@@ -46,7 +46,7 @@ export interface IContaEdit {
     bloqueado: boolean
     nomeConta: string
     usuariosIdFK: number
-    bancosIdFK: number
+    idBbancos: number
 }
 
 const Conta: React.FC = () => {
@@ -66,6 +66,9 @@ const Conta: React.FC = () => {
     const auth = localStorage.getItem('Authorization')
     const [contaAtualizar, setContaAtualizar] = useState<number>(0)
     const [carregar, setCarregar] = useState<string>(" ")
+
+    
+
 
     useEffect(() => {
 
@@ -160,9 +163,8 @@ const Conta: React.FC = () => {
             nomeConta: String(nomeConta),
             corrente: Number(corrente),
             poupanca: Number(poupanca),
-            bancosIdFK: {
-                id: Number(idBanco)
-            }
+            idBbancos: Number(idBanco)
+            
 
         }
 
@@ -199,7 +201,7 @@ const Conta: React.FC = () => {
             bloqueado: Boolean(conta.bloqueado),
             nomeConta: String(conta.nomeConta),
             usuariosIdFK: Number(conta.usuariosIdFK.id),
-            bancosIdFK: Number(conta.bancosIdFK.id)
+            idBbancos: Number(conta.bancosIdFK.id)
 
         }
 
