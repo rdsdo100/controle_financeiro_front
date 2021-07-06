@@ -19,11 +19,7 @@ interface IContasCard {
   ativo?: boolean
   bloqueado?: boolean
   nomeConta: string
-  usuariosIdFK?: {
-      id: number
-     
-  }
-  bancosIdFK?: {
+  bancos?: {
       id: number
       nomeBanco?: string
       urlImagemBanco?: string
@@ -42,13 +38,12 @@ const CardsBancos: React.FC<IContasCard> = ({ children,
   corrente,
   poupanca,
   valorTotal,
-  bancosIdFK,
+  bancos,
   idDeleteAtendimentos,
   idEditAtendimentos
   
 
 }) => {
-
 
   const buttonDeleteId = () => {
 
@@ -64,7 +59,7 @@ const buttonEditdId = () => {
     <Container>
 
       <DivLogoBanco>
-        <ImageContaBanco src={bancosIdFK?.urlImagemBanco} alt="Logo Banco" />
+        <ImageContaBanco src={bancos?.urlImagemBanco} alt="Logo Banco" />
       </DivLogoBanco>
 
       <DivBodyBanco>

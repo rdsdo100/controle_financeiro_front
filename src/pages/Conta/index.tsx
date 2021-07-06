@@ -22,8 +22,7 @@ export interface IContas {
     nomeConta: string
     idBbancos?:  number
 
-    
-    bancosIdFK?: {
+    bancos?: {
         id: number
         nomeBanco?: string
         urlImagemBanco?: string
@@ -85,6 +84,7 @@ const Conta: React.FC = () => {
             { headers: { authorization: auth } })
             .then(response => {
                 const resposta: any = response.data
+                console.log(resposta)
                 setListContas(resposta)
                 setCarregar("none")
 
@@ -271,7 +271,7 @@ const Conta: React.FC = () => {
                                     nomeConta={conta?.nomeConta}
                                     corrente={conta?.corrente}
                                     poupanca={conta?.poupanca}
-                                    bancosIdFK={conta?.bancosIdFK}
+                                    bancos={conta?.bancos}
                                     valorTotal={conta?.valorTotal}
                                     idDeleteAtendimentos={handleDeleteBancos}
                                     idEditAtendimentos={editiContas}
